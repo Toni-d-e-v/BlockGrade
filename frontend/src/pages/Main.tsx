@@ -6,8 +6,12 @@ const Main = () => {
   return (
     <div>
     
-    
+    <div style={headerStyle}>
+        BlockGrade - E-dnevnilk
+    </div>
+
     <div style={containerStyle}>
+        
       <div style={boxStyle}>
         <img src={profesorSVG} alt="Profesor" style={{ width: '150px', height: '550px' }} />
         Ja sam Profesor
@@ -27,6 +31,11 @@ const Main = () => {
         style={buttonStyle}>Nastavi</button>
       </div>
     </div>
+    <div style={footerStyle}>
+        <a href="https://github.com/Toni-d-e-v/BlockGrade"> Github </a> 
+        BlockGrade - E-dnevnilk - Projekat za sum.ba Code Challenge 2024
+
+    </div>
     </div>
 
   );
@@ -36,7 +45,7 @@ const containerStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh',
+    height: '60vh',
   };
   
   const boxStyle = {
@@ -69,4 +78,22 @@ const containerStyle = {
       width: 80%;
     }
   }`;
+  const headerStyle = {
+
+    backgroundColor: '#fff',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '14vh',
+    fontSize: '4vh'
+  };
+  const footerStyle = {
+
+    backgroundColor: '#fff',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '14vh',
+    fontSize: '2.7vh'
+  };
 export default Main;
