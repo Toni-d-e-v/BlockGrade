@@ -1,8 +1,6 @@
-# E-dnevnik na Blockchainu
-
-## Opis Projekta
-
-Ovaj projekt implementira e-dnevnik na Ethereum blockchainu kako bi se pratili podaci o ocjenama učenika, radu profesora i drugim relevantnim informacijama u školama.
+# BlockGrade 
+- BlockGrade je inovativni e-dnevnik izgrađen na blockchain tehnologiji 
+- Ovaj projekt implementira e-dnevnik na Ethereum blockchainu kako bi se pratili podaci o ocjenama učenika, radu profesora i drugim relevantnim informacijama u školama.
 
 ## Smart Contract - BlockGrade.sol
 
@@ -71,4 +69,4 @@ Ovaj projekt implementira e-dnevnik na Ethereum blockchainu kako bi se pratili p
 
 ## Autor
 - Toni Dumančić @toni-d-e-v
-- Roko Vidović
+- Roko Vidović @RokoVidovic
