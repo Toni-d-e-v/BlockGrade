@@ -36,6 +36,8 @@ contract BlockGrade {
         string Naziv;
     }
 
+
+
     // Mappings
     mapping(int32 => Ucenik) public ucenici;
     mapping(int32 => Profesor) public profesori;
@@ -48,6 +50,7 @@ contract BlockGrade {
     event DodanaOcjena(int32 ucenikId, int32 predmetId, int8 ocjena);
     event DodanaSkola(int32 skolaId, string naziv, address direktor);
     event DodanaBiljeska(int32 ucenikId, int32 predmetniNastavnikId, int32 predmetId, string datum, string sadrzaj);
+    event ObrisanaSkola(int32 skolaId);
 
     // Modifiers
     modifier samoOwner() {
@@ -56,7 +59,7 @@ contract BlockGrade {
     }
 
     modifier samoOwnerSkole(int32 skolaId) {
-        require(msg.sender == skole[skolaId].direktor, "Samo direktor skole moze pristupiti ovoj funkciji.");
+        require(msg.sender == skole[skolaId].direktor || msg.sender == owner, "Samo direktor skole ili super admin moze pristupiti ovoj funkciji.");
         _;
     }
 
@@ -80,7 +83,16 @@ contract BlockGrade {
         novaSkola.naziv = naziv;
         novaSkola.direktor = direktor;
 
+
+
         emit DodanaSkola(skolaId, naziv, direktor);
+    }
+
+    function obrisiSkolu(int32 skolaId) public samoOwner {
+        require(skole[skolaId].id == skolaId, "Skola s ovim ID-om ne postoji.");
+
+        delete skole[skolaId];
+        emit ObrisanaSkola(skolaId);
     }
 
     function postaviDirektora(int32 skolaId, address direktor) public samoOwner {
@@ -132,4 +144,5 @@ contract BlockGrade {
 
         emit DodanaBiljeska(ucenikId, predmetniNastavnikId, predmetId, datum, sadrzaj);
     }
+    
 }
