@@ -3,21 +3,30 @@ pragma solidity ^0.8.9;
 
 contract BlockGrade {
     // Structs
+    struct Biljeska {
+        int32 predmetniNastavnikId;
+        int32 predmetId;
+        string datum;
+        string sadrzaj;
+    }
+
     struct Ucenik {
         int32 id;
         string Odjel;
         mapping(int32 => int8) ocjene;
+        mapping(int32 => Biljeska[]) biljeske;
     }   
 
     struct Profesor {
         int32 id;
         string Ime;
         address adresaa;
-        int32 predmetId; // Dodan atribut predmetId za praćenje kojem predmetu profesor pripada
+        int32 predmetId;
     } 
 
     struct Skola {
         int32 id;
+        string naziv;
         address direktor;
         mapping(address => bool) profesori;
     }
@@ -37,7 +46,8 @@ contract BlockGrade {
     event DodanUcenik(int32 ucenikId, string odjel);
     event DodanProfesor(int32 profesorId, string ime, address profesorAdresa);
     event DodanaOcjena(int32 ucenikId, int32 predmetId, int8 ocjena);
-    event DodanaSkola(int32 skolaId, address direktor);
+    event DodanaSkola(int32 skolaId, string naziv, address direktor);
+    event DodanaBiljeska(int32 ucenikId, int32 predmetniNastavnikId, int32 predmetId, string datum, string sadrzaj);
 
     // Modifiers
     modifier samoOwner() {
@@ -64,12 +74,13 @@ contract BlockGrade {
     }
 
     // Functions for Super Admin (Owner)
-    function dodajSkolu(int32 skolaId, address direktor) public samoOwner {
+    function dodajSkolu(int32 skolaId, string memory naziv, address direktor) public samoOwner {
         Skola storage novaSkola = skole[skolaId];
         novaSkola.id = skolaId;
+        novaSkola.naziv = naziv;
         novaSkola.direktor = direktor;
 
-        emit DodanaSkola(skolaId, direktor);
+        emit DodanaSkola(skolaId, naziv, direktor);
     }
 
     function postaviDirektora(int32 skolaId, address direktor) public samoOwner {
@@ -104,5 +115,21 @@ contract BlockGrade {
         targetUcenik.ocjene[predmetId] = ocjena;
 
         emit DodanaOcjena(ucenikId, predmetId, ocjena);
+    }
+
+    function dodajBiljesku(int32 ucenikId, int32 predmetniNastavnikId, int32 predmetId, string memory datum, string memory sadrzaj) public {
+        require(msg.sender == profesori[predmetniNastavnikId].adresaa, "Samo predmetni nastavnik moze dodavati biljeske za ovaj predmet.");
+
+        Biljeska memory novaBiljeska = Biljeska({
+            predmetniNastavnikId: predmetniNastavnikId,
+            predmetId: predmetId,
+            datum: datum,
+            sadrzaj: sadrzaj
+        });
+
+        Ucenik storage targetUcenik = ucenici[ucenikId];
+        targetUcenik.biljeske[predmetId].push(novaBiljeska);
+
+        emit DodanaBiljeska(ucenikId, predmetniNastavnikId, predmetId, datum, sadrzaj);
     }
 }
