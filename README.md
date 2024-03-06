@@ -25,6 +25,9 @@ Svako izdano uvjerenje jasno je povezano s identitetom ravnatelja koji ga je izd
 ### Prijenos Vlasništva i Decentralizacija:
 Vlasnik ugovora može jednostavno prenositi vlasništvo nad sustavom putem pametnih ugovora. Ova značajka omogućuje fleksibilnost i decentralizaciju upravljanja sustavom.
 
+### 
+- https://goerli.etherscan.io/ - Goerli Test-net mreza
+- https://goerli.etherscan.io/address/0xf7109ebbe9e8fdaee66a8806c6645cb0bfe31f71 - Smart contract
 ## Autori
 
 - Toni Dumančić [@toni-d-e-v](https://github.com/toni-d-e-v)
