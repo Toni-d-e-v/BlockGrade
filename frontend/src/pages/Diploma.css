@@ -1,0 +1,129 @@
+/* Diploma.css */
+.diploma {
+    max-width: 100%; /* Adjusted max-width for responsiveness */
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid #3498db;
+    box-shadow: 0 0 40px rgba(52, 152, 219, 0.3);
+    background-color: #fcfcfc;
+}
+
+/* Existing styles remain unchanged */
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 600px) {
+    .center-part {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+    }
+
+    .name-section,
+    .description-section,
+    .school-section {
+        margin-right: 0; /* Remove margin for better stacking */
+    }
+}
+
+.header_diploma {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3498db;
+    font-size: 24px;
+}
+
+.center-part {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.tabledip {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-left: 25px;
+
+}
+
+.tabledip th, .tabledip td {
+    border: 1px solid #bdc3c7;
+    padding: 2px;
+    text-align: left;
+}
+
+.tabledip th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.ravnatelj {
+    position: relative;
+
+    left: 80px;
+    padding: 10px;
+    color: #2c3e50;
+    margin-top: 30px;
+}
+
+@font-face {
+    font-family: 'BrettleySignatureRegular';
+    src: url('./BrettleySignatureRegular-RpEMo.ttf') format('truetype');
+}
+
+.signature {
+    font-family: 'BrettleySignatureRegular', 'Courier New', Courier, monospace;
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.blockchain-link {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.blockchain-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.blockchain-link a:hover {
+    text-decoration: underline;
+}
+.center-part {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    flex-wrap: wrap;
+    display: inline; /* Display the school name inline */
+
+}
+
+
+.name-section p, h4 {
+    display: inline; /* Display the school name inline */
+    margin-top: 10px;
+}
+.description-section p, h4 {
+    display: inline; /* Display the school name inline */
+    margin-top: 10px;
+}
+
+.school-section p, h4 {
+    display: inline; /* Display the school name inline */
+    margin-top: 10px;
+}
+
+.verfiy {
+    position: relative;
+    color: #4c9c38;
+    font-size: 18px;
+
+
+
+}
+.signature_verify {
+    font-family: 'BrettleySignatureRegular', 'Courier New', Courier, monospace;
+    font-size: 36px;
+    color: #4c9c38;
+
+}

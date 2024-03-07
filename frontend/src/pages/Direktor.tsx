@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 import BlockGradeABI from '../../BlockGrade.json';
+import './Direktor.css';
 
-const Profesor = () => {
+const Direktor = () => {
   const initialState = { accounts: [], chainId: null };
   const [wallet, setWallet] = useState(initialState);
   const [connected, setConnected] = useState(false);
@@ -14,9 +15,11 @@ const Profesor = () => {
 
   const [studentName, setStudentName] = useState('');
   const [description, setDescription] = useState('');
-  const [subjects, setSubjects] = useState([]);
-  const [grades, setGrades] = useState([]);
+  const [subjectRows, setSubjectRows] = useState([{ subject: '', grade: '' }]);
   const [issuedCertificateId, setIssuedCertificateId] = useState(null);
+
+  // Loading state
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const checkEthereumProvider = async () => {
@@ -48,7 +51,7 @@ const Profesor = () => {
       const web3 = new Web3(window.ethereum);
       const contractInstance = new web3.eth.Contract(
         BlockGradeABI.abi,
-        '0xf7109ebbe9e8fdaee66a8806c6645cb0bfe31f71' // Zamijenite sa svojom adresom ugovora
+        '0xf7109ebbe9e8fdaee66a8806c6645cb0bfe31f71' // Replace with your contract address
       );
 
       setBlockGradeContract(contractInstance);
@@ -94,91 +97,171 @@ const Profesor = () => {
     setCurrentScreen(0);
   };
 
+  const handleAddRow = () => {
+    setSubjectRows([...subjectRows, { subject: '', grade: '' }]);
+  };
+
+  const handleSubjectChange = (index, value) => {
+    const newSubjectRows = [...subjectRows];
+    newSubjectRows[index].subject = value;
+    setSubjectRows(newSubjectRows);
+  };
+
+  const handleGradeChange = (index, value) => {
+    const newSubjectRows = [...subjectRows];
+    newSubjectRows[index].grade = value;
+    setSubjectRows(newSubjectRows);
+  };
+
+  const handleDeleteRow = (index) => {
+    const newSubjectRows = [...subjectRows];
+    newSubjectRows.splice(index, 1);
+    setSubjectRows(newSubjectRows);
+  };
+
   const issueCertificate = async () => {
     if (blockGradeContract) {
       try {
+        setLoading(true);
+
         const accounts = await window.ethereum.request({ method: 'eth_accounts' });
         const sender = accounts[0];
 
+        const subjectsArray = subjectRows.map((row) => row.subject);
+        const gradesArray = subjectRows.map((row) => row.grade);
+
         const receipt = await blockGradeContract.methods
-          .izdajUvjerenje(studentName, description, subjects, grades)
-          .send({ 
+          .izdajUvjerenje(studentName, description, subjectsArray, gradesArray)
+          .send({
             from: sender,
-            gasPrice: '25000000' // Optional: You can set the gas price in Wei (2.5 Gwei in Wei)
-           });
+            gasPrice: '25000000',
+          });
 
-        // Access the logs to get the emitted event data
         const logs = receipt.events.UvjerenjeIzdano.returnValues;
-
-        // Extract the certificate ID from the logs
         const certificateId = logs.id.slice(0, -48);
         console.log('Certificate ID:', certificateId);
         setIssuedCertificateId(certificateId);
+
         setCurrentScreen(2);
       } catch (error) {
         console.error('Error issuing certificate:', error.message || error);
+        alert("Molimo vas popunite sve!")
+      } finally {
+        setLoading(false);
       }
     }
   };
 
   return (
-    <div className="App">
+    <div className={`App ${loading ? 'loading' : ''}`}>
       <div className="header">
+        <h2>BlockGrade - E-diplome - Direktor sucelje
+
         {connected ? (
-          <div>
-            <h2>Connected to Blockchain</h2>
-            <p>ChainId: {wallet.chainId}</p>
-            <button onClick={handleDisconnect}>Disconnect</button>
-          </div>
+            <button className="button-17"  onClick={handleDisconnect}>Disconnect</button>
         ) : (
-          <button onClick={handleConnect}>Connect MetaMask</button>
+          <button className="button-17" onClick={handleConnect}>Connect MetaMask</button>
         )}
+        </h2>
+ 
       </div>
 
       {currentScreen === 1 && connected && (
         <div>
-          <h3>Issue Certificate</h3>
-          <label htmlFor="studentName">Student Name:</label>
+        <div className="Form">
+          <h3>Izdaj E-diplomu / E-uvjerenje</h3>
+          <label htmlFor="studentName">Ime i Prezime:</label>
           <input
             type="text"
             id="studentName"
             value={studentName}
             onChange={(e) => setStudentName(e.target.value)}
           />
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">Opis:</label>
           <input
             type="text"
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <label htmlFor="subjects">Subjects (comma-separated):</label>
-          <input
-            type="text"
-            id="subjects"
-            value={subjects.join(',')}
-            onChange={(e) => setSubjects(e.target.value.split(','))}
-          />
-          <label htmlFor="grades">Grades (comma-separated):</label>
-          <input
-            type="text"
-            id="grades"
-            value={grades.join(',')}
-            onChange={(e) => setGrades(e.target.value.split(','))}
-          />
-          <button onClick={issueCertificate}>Issue Certificate</button>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Predmet</th>
+                <th>Ocijena</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subjectRows.map((row, index) => (
+                <tr key={index}>
+                  <td style={{
+                    borderColor: 'white'
+                  }}>
+                    <input
+                      type="text"
+                      value={row.subject}
+                      onChange={(e) => handleSubjectChange(index, e.target.value)}
+                    />
+                  </td>
+                  <td
+                  style={{
+                    borderColor: 'white'
+                  }}
+                  >
+                    <input
+                      type="text"
+                      value={row.grade}
+                      onChange={(e) => handleGradeChange(index, e.target.value)}
+                    />
+                    
+                  </td>
+                  
+                  <button
+                    style={
+                      {
+                        marginLeft: "20px",
+                        backgroundColor: 'red'
+                      }
+                    }
+                    
+                     onClick={() => handleDeleteRow(index)}>X</button>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <button className="button-17" onClick={handleAddRow}>Dodaj red</button>
+          <button className="button-17" onClick={issueCertificate} disabled={loading}>
+            {loading ? 'Loading...' : 'Izdaj uvjerenje'}
+          </button>
+
+
+        </div>
+                  <p>
+                  Izdavanje uvjerenja moguće je samo putem ovlaštenih ADRESA!
+              </p>
+              <p>
+                  Svaka ADRESA je povezana s DIREKTOROM (IME, PREZIME, ŠKOLA).
+              </p>
         </div>
       )}
 
+
       {currentScreen === 2 && connected && issuedCertificateId && (
         <div>
-          <h3>Certificate Issued</h3>
-          <p>Certificate ID: {issuedCertificateId}</p>
-          {/* Display other certificate details if needed */}
+          <h3>Uvjerenje izdano!</h3>
+          <p>Link: <a href={`/ediploma?code=${issuedCertificateId.substring(2)}`}>{issuedCertificateId.substring(2)}</a></p>
+          <button 
+                onClick={
+                    () => window.location = "/direktor"
+                }
+                className="button-17">Direktor Panel</button>
+
         </div>
       )}
     </div>
   );
 };
 
-export default Profesor;
+export default Direktor;

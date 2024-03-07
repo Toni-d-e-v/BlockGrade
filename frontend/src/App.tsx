@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Main from './pages/Main'; // Import your components for different pages
-import Profesor from './pages/Profesor';
-import Ucenik from './pages/Ucenik';
+import Direktor from './pages/Direktor';
+import EDiploma from './pages/EDiploma';
 import { MetaMaskProvider } from '@metamask/sdk-react';
 
 const App = () => {
@@ -12,10 +12,10 @@ const App = () => {
     <div className="App">
       {/* Define routes using Switch and Route */}
       <Routes>
-              <Route  path="/" element={<Main/>} />
+        <Route  path="/" element={<Main/>} />
  
-        <Route  path="/profesor" element={<Profesor/>} />
-        <Route  path="/ucenik" element={<Ucenik/>} />
+        <Route  path="/direktor" element={<Direktor/>} />
+        <Route  path="/ediploma" element={<EDiploma/>} />
 
       </Routes>
     </div>

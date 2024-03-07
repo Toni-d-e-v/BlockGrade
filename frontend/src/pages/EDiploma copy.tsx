@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
 
-const Ucenik = () => {
+const EDiploma = () => {
   const initialState = { accounts: [], Certificate: [] };
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get('code') || '';  // Dobavljanje ID-a iz URL parametra "code"
@@ -27,8 +27,8 @@ const Ucenik = () => {
   const getCertificates = async (provider, id) => {
     try {
       const blockGradeContract = new ethers.Contract('0xf7109ebbe9e8fdaee66a8806c6645cb0bfe31f71', BlockGradeABI.abi, provider);
-      const Certificate = await blockGradeContract.dohvatiUvjerenje(id);
-      console.log(Certificate[5][1]);
+      const Certificate = await blockGradeContract.dohvatiUvjerenje("0x" +id); // TO HEX + 0x
+      console.log(Certificate, "0x" + id);
       return Certificate;
     } catch (error) {
       console.error('Error fetching Certificate:', error.message || error);
@@ -44,12 +44,13 @@ const Ucenik = () => {
       <div>
         Certificate:
         <ul>
-         
+            Ime i PREZIME:
           <li>{state.Certificate[0]}</li>
+          Opis:
           <li>{state.Certificate[1]}</li>
+          Skola:
           <li>{state.Certificate[2]}</li>
-          <li>{state.Certificate[5]}</li>
-
+    
           <div>
             Ravnatelj
           {state.Certificate[3] && (
@@ -88,4 +89,4 @@ const Ucenik = () => {
   );
 };
 
-export default Ucenik;
+export default EDiploma;
