@@ -3,6 +3,7 @@ import obiteljSVG from '../assets/obitelj.svg';
 import profesorSVG from '../assets/profesor.svg';
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
+import './Diploma.css';
 
 const Main = () => {
   const [code, setCode] = useState('');
@@ -40,16 +41,16 @@ const Main = () => {
         </div>
         <div style={boxStyle}>
         <h2>Kako radi?</h2>
-        <p>
-        Svako izdano uvjerenje jasno je povezano s identitetom ravnatelja koji ga je izdao.
-        </p>
-        <p>
+       
+      
+       
         Sustav koristi prednosti blockchain tehnologije kako bi osigurao  neizmjenjivost izdanih diploma.
-        </p>
-        <p>
+ 
+          <p></p>
         BlockGrade koristi Ethereum blockchain kako bi omogućio visoku razinu transparentnosti. 
+        <p className="signature_verify"> 
+        Blockchain provjereno! 
         </p>
-
       </div>
     </div>
 
