@@ -41,7 +41,11 @@ const EDiploma = () => {
   };
 
   return (
-    <div>
+    <div
+    style={{
+      paddingTop: '8vh'
+    }}
+    >
     <div className="diploma">
       <div className="header_diploma">
         <h2>BlockGrade - E-diploma</h2>

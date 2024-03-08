@@ -31,4 +31,7 @@ Vlasnik ugovora može jednostavno prenositi vlasništvo nad sustavom putem pamet
 ## Autori
 
 - Toni Dumančić [@toni-d-e-v](https://github.com/toni-d-e-v)
+-- Co-founder Crypto.ba najveca kritpo zajednica u BiH i sire!
+-- Blockchain development, backend and frotnend developer
 - Roko Vidović [@RokoVidovic](https://github.com/RokoVidovic)
+-- Video, Frontend, grafika 
