@@ -84,9 +84,12 @@ const Direktor = () => {
         setCurrentScreen(1);
       } catch (error) {
         console.error('Error connecting to MetaMask:', error.message || error);
+        alert('Greksa sa povezivanjem!')
+
       }
     } else {
       console.error('MetaMask extension not detected');
+      alert('Nemate MetaMask instaliran!')
     }
   };
 
