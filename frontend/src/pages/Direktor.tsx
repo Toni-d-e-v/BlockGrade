@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 import BlockGradeABI from '../../BlockGrade.json';
-import './Direktor.css';
-
+import './Direktor.css'
 const Direktor = () => {
   const initialState = { accounts: [], chainId: null };
   const [wallet, setWallet] = useState(initialState);

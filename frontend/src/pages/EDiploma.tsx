@@ -46,7 +46,7 @@ const EDiploma = () => {
       paddingTop: '8vh'
     }}
     >
-    <div className="diploma">
+    <div className="box">
       <div className="header_diploma">
         <h2>BlockGrade - E-diploma</h2>
       </div>

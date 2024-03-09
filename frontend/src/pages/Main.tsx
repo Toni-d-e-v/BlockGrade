@@ -3,8 +3,6 @@ import obiteljSVG from '../assets/obitelj.svg';
 import profesorSVG from '../assets/profesor.svg';
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
-import './Diploma.css';
-
 const Main = () => {
   const [code, setCode] = useState('');
   const [latestEvents, setLatestEvents] = useState([]);

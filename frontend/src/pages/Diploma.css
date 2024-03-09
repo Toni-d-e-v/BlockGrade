@@ -3,11 +3,56 @@
     max-width: 100%; /* Adjusted max-width for responsiveness */
     margin: 0 auto;
     padding: 10px;
-    border: 2px solid #3498db;
-    box-shadow: 0 0 40px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 0 40px linear-gradient(90deg, #d11717 0%, #dcfffb 100%);
     background-color: #fcfcfc;
+    
+    
+}
+.box {
+    /* Required properties */
+    position: relative;
+    background: white;
+    max-width: 100%; /* Adjusted max-width for responsiveness */
+    margin: 0 auto;
+    padding: 15px;
+
+
+  }
+  
+.box:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(-45deg, #04b8ff 0%, #ff8800 100% );
+    transform: translate3d(0px, 20px, 0) scale(0.95);
+    filter: blur(20px);
+    opacity: var(1.7);
+    transition: opacity 0.3s;
+    border-radius: inherit;
 }
 
+/* 
+* Prevents issues when the parent creates a 
+* stacking context. (For example, using the transform
+* property )
+*/
+.box::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    border-radius: inherit;
+}
+        
+        
 /* Existing styles remain unchanged */
 
 /* Media query for smaller screens */
@@ -66,7 +111,7 @@
 
 @font-face {
     font-family: 'BrettleySignatureRegular';
-    src: url('./BrettleySignatureRegular-RpEMo.ttf') format('truetype');
+    src: url('../BrettleySignatureRegular-RpEMo.ttf') format('truetype');
 }
 
 .signature {
@@ -119,12 +164,11 @@
 .signature_verify {
     font-family: 'BrettleySignatureRegular', 'Courier New', Courier, monospace;
     font-size: 36px;
-    color: #e76f51;
+    color: #51e765;
 
 }
 
 body {
-    background: linear-gradient(90deg, #264653 0%, #2a9d8f 100%);
-    background: #2d4853;
+    background: linear-gradient(90deg, #fff6ed 50%, #f4fffe 100%);
     
 }
