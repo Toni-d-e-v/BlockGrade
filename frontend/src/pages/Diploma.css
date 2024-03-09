@@ -99,18 +99,13 @@
 }
 
 
-.name-section p, h4 {
-    display: inline; /* Display the school name inline */
-    margin-top: 10px;
-}
-.description-section p, h4 {
-    display: inline; /* Display the school name inline */
-    margin-top: 10px;
-}
-
+.name-section p, h4,
+.description-section p, h4,
 .school-section p, h4 {
+    font-family:sans-serif;
     display: inline; /* Display the school name inline */
     margin-top: 10px;
+    text-indent: 0; /* Set the text indent to 0 */
 }
 
 .verfiy {
@@ -124,6 +119,12 @@
 .signature_verify {
     font-family: 'BrettleySignatureRegular', 'Courier New', Courier, monospace;
     font-size: 36px;
-    color: #4c9c38;
+    color: #e76f51;
 
+}
+
+body {
+    background: linear-gradient(90deg, #264653 0%, #2a9d8f 100%);
+    background: #2d4853;
+    
 }

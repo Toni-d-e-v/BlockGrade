@@ -55,7 +55,7 @@ const Main = () => {
 
     <div style={footerStyle}>
       <div>
-      <a href="https://github.com/Toni-d-e-v/BlockGrade"> Github </a> 
+      <a href="https://github.com/Toni-d-e-v/BlockGrade">Github </a> 
         BlockGrade - E-diplome - Projekat za sum.ba Code Challenge 2024
       </div>
       <button 
@@ -96,15 +96,16 @@ const containerStyle = {
     backgroundColor: '#3498db',
     color: '#fff',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '6px',
     cursor: 'pointer',
   };
   const buttonStyle_2 = {
-    padding: '2px 8px',
+    padding: '8px 8px',
+    margin: '5px',
     backgroundColor: '#3498db',
     color: '#fff',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '6px',
     cursor: 'pointer',
   };
   // Responsive styles
@@ -120,7 +121,9 @@ const containerStyle = {
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: '14vh',
-    fontSize: '4vh'
+    fontSize: '4vh',
+    borderRadius: '10px',
+    padding: '20px'
   };
   const footerStyle = {
 
@@ -130,6 +133,8 @@ const containerStyle = {
     alignItems: 'center',
     marginTop: '10vh',
     marginBottom: '25px',
+    borderRadius: '10px',
+    padding: '10px'
 
   };
 export default Main;
