@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Main from './pages/Main'; // Import your components for different pages
 import Direktor from './pages/Direktor';
 import EDiploma from './pages/EDiploma';
+import Info from './pages/Info';
 import { MetaMaskProvider } from '@metamask/sdk-react';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
  
         <Route  path="/direktor" element={<Direktor/>} />
         <Route  path="/ediploma" element={<EDiploma/>} />
+        <Route  path="/info" element={<Info/>} />
 
       </Routes>
     </div>

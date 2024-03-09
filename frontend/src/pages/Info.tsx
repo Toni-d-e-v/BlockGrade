@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import obiteljSVG from '../assets/obitelj.svg';
 import profesorSVG from '../assets/profesor.svg';
-import { ethers, JsonRpcProvider } from 'ethers';
-import BlockGradeABI from '../../BlockGrade.json';
-const Main = () => {
-  const [code, setCode] = useState('');
-  const [latestEvents, setLatestEvents] = useState([]);
+
+const Info = () => {
+
 
 
   return (
@@ -18,61 +16,51 @@ const Main = () => {
     >
     
     <div style={headerStyle}>
-        BlockGrade - E-Diploma
-    </div>
-
-    <div style={containerStyle}>
-
-      <div style={boxStyle}>
-          <img src={obiteljSVG} alt="Obitelj" style={{ width: '200px', height: '550px' }} />
-          Zelim vidjeti E-Diplomu
-          <input 
-            style={{
-              
-            }}
-            type="text" // Assuming it's a text input
-            value={code} // Use state or a variable to store the input value
-            onChange={(e) => setCode(e.target.value)} // Update the state or variable on input change
-            placeholder='ID diplome'
-          />
-          <button 
-            onClick={() => window.location = `/ediploma?code=${code}`} // Pass the code value to the URL
+        BlockGrade - E-Diploma        <button 
+            onClick={() => window.location = `/`} // Pass the code value to the URL
             style={buttonStyle}
           >
-            Nastavi
+            Nazad
           </button>
-        </div>
-        <div style={boxStyle}>
-        <h2>Kako radi?</h2>
-       
-      
-       
-        Sustav koristi prednosti blockchain tehnologije kako bi osigurao  neizmjenjivost izdanih diploma.
- 
-          <p></p>
-        BlockGrade koristi Ethereum blockchain kako bi omogućio visoku razinu transparentnosti. 
-        <a
-        href='/info'
-        >
-        Dodatne informacije
-        </a>
-        <p className="signature_verify"> 
-        Blockchain provjereno! 
-        </p>
-
-      </div>
+    </div>
+    <div style={containerStyle}>
+    <div style={boxStyle}>
+        {/* Prvi box */}
+        <h2>Transparentnost Blockchaina</h2>
+        <p>BlockGrade koristi Ethereum blockchain za visoku transparentnost e-diploma. Svi podaci pohranjuju se na blockchainu, čineći ih dostupnima na Ethereum platformi.</p>
+        <p>Neporecivost i Neizmjenjivost: Blockchain osigurava neporecivost i neizmjenjivost izdanih diploma s jedinstvenim identifikatorom.</p>
+    </div>
+    <div style={boxStyle}>
+        {/* Drugi box */}
+        <h2>Automatizacija Izdavanja Uvjerenja</h2>
+        <p>Pametni ugovori omogućuju brzo i učinkovito izdavanje diploma, smanjujući ručne intervencije.</p>
+        <p>Povezanost s Identitetom Ravnatelja: Svako uvjerenje je povezano s identitetom ravnatelja, pridonoseći sigurnosti i povjerenju u ispravnost podataka.</p>
     </div>
 
+
+<div style={boxStyle}>
+    {/* Četvrti box */}
+    <h2>Dodatne informacije</h2>
+    <p>Ovdje možete dodati dodatne informacije o sustavu BlockGrade.</p>
+    <h2>Linkovi</h2>
+    {/* Dodajte ovdje dodatne linkove ili informacije */}
+    <a href="https://docs.google.com/presentation/d/1lFtP7JAIdi0TmIeXEr87uiyQ4m_X6nZSoZcjwSH7ovM/">Prezentacija</a>
+    <a href="https://block-grade.vercel.app/ediploma?code=4891aff173ac1187">Primjer E-diplome</a>
+    {/* Dodajte informacije o autorima */}
+    <h2>Autori</h2>
+
+    <ul>
+        <li><a href="https://github.com/toni-d-e-v">Toni Dumančić</a></li>
+        <li><a href="https://github.com/RokoVidovic">Roko Vidović</a></li>
+    </ul>
+</div>
+</div>
     <div style={footerStyle}>
       <div>
       <a href="https://github.com/Toni-d-e-v/BlockGrade">Github </a> 
         BlockGrade - E-diplome - Projekat za sum.ba Code Challenge 2024
       </div>
-      <button 
-                onClick={
-                    () => window.location = "/direktor"
-                }
-        style={buttonStyle_2}>Direktor Panel</button>
+
     </div>
     </div>
 
@@ -88,7 +76,7 @@ const containerStyle = {
   
   const boxStyle = {
     width: '250px',
-    height: '300px',
+    height: '350px',
     backgroundColor: '#fff',
     border: '2px solid #3498db',
     borderRadius: '8px',
@@ -147,4 +135,4 @@ const containerStyle = {
     padding: '10px'
 
   };
-export default Main;
+export default Info;
