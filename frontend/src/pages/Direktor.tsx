@@ -137,6 +137,7 @@ const Direktor = () => {
           .send({
             from: sender,
             gasPrice: '25000000',
+            gasLimit: '52062600'
           });
 
         const logs = receipt.events.UvjerenjeIzdano.returnValues;
