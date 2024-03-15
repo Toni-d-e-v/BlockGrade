@@ -1,23 +1,30 @@
 /* Diploma.css */
-.diploma {
-    max-width: 100%; /* Adjusted max-width for responsiveness */
-    margin: 0 auto;
-    padding: 10px;
-    box-shadow: 0 0 40px linear-gradient(90deg, #d11717 0%, #dcfffb 100%);
-    background-color: #fcfcfc;
-    
-    
-}
+
 .box {
-    /* Required properties */
     position: relative;
     background: white;
     max-width: 100%; /* Adjusted max-width for responsiveness */
     margin: 0 auto;
     padding: 15px;
+    margin-top: 15vh;
+}
 
+/* Media query for smaller devices */
+@media only screen and (max-width: 600px) {
+    .box {
+        padding: 5px; /* Adjusted padding for smaller devices */
+    }
+    .ravnatelj {
+        position: absolute;
+    
+        left: 80px;
+        padding: 10px;
+        color: #0080ff;
+        margin-top: 30px;
+    }
+    
+}
 
-  }
   
 .box:before {
     content: "";
@@ -52,21 +59,6 @@
     border-radius: inherit;
 }
         
-        
-/* Existing styles remain unchanged */
-
-/* Media query for smaller screens */
-@media only screen and (max-width: 600px) {
-    .center-part {
-        flex-direction: column; /* Stack sections vertically on smaller screens */
-    }
-
-    .name-section,
-    .description-section,
-    .school-section {
-        margin-right: 0; /* Remove margin for better stacking */
-    }
-}
 
 .header_diploma {
     text-align: center;
@@ -89,21 +81,37 @@
 
 }
 
+.tabledip {
+    border-collapse: collapse;
+    width: 80%;
+}
+
 .tabledip th, .tabledip td {
     border: 1px solid #bdc3c7;
-    padding: 2px;
+    padding: 5px; /* Maintain padding */
     text-align: left;
 }
 
 .tabledip th {
-    background-color: #3498db;
+    background-color: #2773be; /* Darker background color for headers */
     color: #fff;
 }
+
+/* Add alternating row colors */
+.tabledip tr:nth-child(even) {
+    background-color: #f2f2f2; /* Lighter background color for even rows */
+}
+
+/* Add hover effect for better interactivity */
+.tabledip tr:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+}
+
 
 .ravnatelj {
     position: relative;
 
-    left: 80px;
+    left: 0px;
     padding: 10px;
     color: #2c3e50;
     margin-top: 30px;
@@ -130,7 +138,15 @@
     text-decoration: none;
     font-weight: bold;
 }
-
+.ravnatelj-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .button-container {
+    margin-right: 50px; /* Adjust margin as needed */
+  }
+  
 .blockchain-link a:hover {
     text-decoration: underline;
 }

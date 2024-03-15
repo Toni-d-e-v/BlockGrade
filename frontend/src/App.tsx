@@ -27,19 +27,7 @@ const App = () => {
         <Route path="/direktor" element={<Direktor />} />
         <Route
           path="/ediploma"
-          element={
-            loading ? (
-              // You can customize the loading indicator or leave it blank
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-  <video width="640" height="360" autoPlay controls={false} playbackRate={2.0}>
-    <source src="/video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
-            ) : (
-              <EDiploma />
-            )
-          }
+          element=              {<EDiploma />}
         />
         <Route path="/info" element={<Info />} />
       </Routes>
