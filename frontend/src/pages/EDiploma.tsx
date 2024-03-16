@@ -4,7 +4,12 @@ import qrImage from 'qr-image'; // Import qr-image library
 import './Diploma.css';
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
+import logo from '../assets/logo.png';
+import hackathonLogo from '../assets/logo-HACKATHON.png';
+
 import 'jspdf-autotable'; // Import jspdf-autotable
+
+
 const EDiploma = () => {
   const initialState = { accounts: [], Certificate: [] };
   const urlParams = new URLSearchParams(window.location.search);
@@ -38,15 +43,20 @@ const EDiploma = () => {
       return [];
     }
   };
+  const replaceCroatianLetters = (text) => {
+    const croatianLetters = {
+      "č": "c", "Č": "C",
+      "ć": "c", "Ć": "C",
+      "ž": "z", "Ž": "Z",
+      "š": "s", "Š": "S",
+      "đ": "dj", "Đ": "Dj",
+  };
+    return text.replace(/[čćžšđ]/g, (letter) => croatianLetters[letter] || letter);
+}
   const handlePrintDiploma = () => {
     const doc = new jsPDF();
     const margin = 10;
     const startY = 20;
-
-    // Add border
-    doc.setDrawColor(44, 62, 80);
-    doc.setLineWidth(2);
-    doc.rect(margin, startY, doc.internal.pageSize.getWidth() - 2 * margin, 300); // Adjust height according to your content
 
     // Add header
     doc.setFontSize(18);
@@ -57,10 +67,11 @@ const EDiploma = () => {
     doc.setFontSize(12);
     doc.setTextColor(44, 62, 80);
 
-    doc.text(`Ime i Prezime: ${state.Certificate[0]}`, margin + 10, startY + 30);
-    doc.text(`Opis: ${state.Certificate[1]}`, margin + 10, startY + 40);
-    doc.text(`Škola: ${state.Certificate[2]}`, margin + 10, startY + 50);
-    doc.text(`Ravnatelj: ${state.Certificate[3][0]}`, margin + 10, startY + 60);
+    doc.text(`Ime i Prezime: ${replaceCroatianLetters(state.Certificate[0])}`, margin + 10, startY + 30);
+    doc.text(`Opis: ${replaceCroatianLetters(state.Certificate[1])}`, margin + 10, startY + 40);
+    const certificateText = `Škola: ${replaceCroatianLetters(state.Certificate[2])}`;
+    doc.text(certificateText, margin + 10, startY + 50);    
+    doc.text(`Ravnatelj: ${replaceCroatianLetters(state.Certificate[3][0])}`, margin + 10, startY + 60);
 
     // Add table for subjects
     const tableColumns = ['Predmet', 'Ocjena'];
@@ -82,7 +93,7 @@ const EDiploma = () => {
             body: tableRows,
             startY: tableY,
             margin: { top: tableY, left: 50, right: 0, bottom: 0 },
-            styles: { textColor: [44, 62, 80], fontSize: 12, fontStyle: 'bold' },
+            1: { cellWidth: 50, textColor: [255, 255, 255] }, // Setting text color to white for the second column
             columnStyles: {
                 0: { cellWidth: 50 },
                 1: { cellWidth: 50 },
@@ -96,10 +107,19 @@ const EDiploma = () => {
     const qrBase64 = Buffer.from(qrImageBuffer).toString('base64');
     doc.addImage(`data:image/png;base64,${qrBase64}`, 'PNG', margin + 10, 240, 50, 50);
     doc.text(`ID:${id}`, margin + 15 , 244);
+  // Add logos
+  const logoImg = new Image();
+  const hackathonLogoImg = new Image();
 
+  logoImg.src = logo;
+  hackathonLogoImg.src = hackathonLogo;
+
+  doc.addImage(logoImg, 'PNG', margin + 10, 10, 30, 30);
+  doc.addImage(hackathonLogoImg, 'PNG', margin + 150, 10, 45, 30);
     doc.text(`Skenirajte QR code da biste provjerili E-diplomu!`, margin + 15 , 290);
+    doc.text(`Generirano od strane BlockGrade-a`, margin + 120 , 290);
 
-    
+
     doc.save('diploma.pdf');
 };
 
