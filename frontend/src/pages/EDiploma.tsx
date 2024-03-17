@@ -74,7 +74,7 @@ const EDiploma = () => {
     doc.text(`Ravnatelj: ${replaceCroatianLetters(state.Certificate[3][0])}`, margin + 10, startY + 60);
 
     // Add table for subjects
-    const tableColumns = ['Predmet', 'Ocjena'];
+    const tableColumns = ['Predmet', 'Ocijena'];
     const tableRows = [];
     if (state.Certificate[4] && state.Certificate[5]) {
         state.Certificate[4].forEach((subject, index) => {
@@ -82,10 +82,10 @@ const EDiploma = () => {
             tableRows.push([subject, grade]);
         });
 
-        const tableWidth = 60 * tableColumns.length + 30; // Calculate total table width
+        const tableWidth = 90 * tableColumns.length + 50; // Calculate total table width
         const tableX = (doc.internal.pageSize.getWidth() - tableWidth) / 2; // Calculate X position to center the table
 
-        const tableHeight = doc.autoTable.previous.finalY - startY + 20;
+        const tableHeight = doc.autoTable.previous.finalY - startY + 40;
         const tableY = startY + 70;
 
         doc.autoTable({
@@ -95,7 +95,7 @@ const EDiploma = () => {
             margin: { top: tableY, left: 50, right: 0, bottom: 0 },
             1: { cellWidth: 50, textColor: [255, 255, 255] }, // Setting text color to white for the second column
             columnStyles: {
-                0: { cellWidth: 50 },
+                0: { cellWidth: 60 },
                 1: { cellWidth: 50 },
             },
         });
@@ -107,20 +107,20 @@ const EDiploma = () => {
     const qrBase64 = Buffer.from(qrImageBuffer).toString('base64');
     doc.addImage(`data:image/png;base64,${qrBase64}`, 'PNG', margin + 10, 240, 50, 50);
     doc.text(`ID:${id}`, margin + 15 , 244);
-  // Add logos
-  const logoImg = new Image();
-  const hackathonLogoImg = new Image();
+    // Add logos
+    const logoImg = new Image();
+    const hackathonLogoImg = new Image();
 
-  logoImg.src = logo;
-  hackathonLogoImg.src = hackathonLogo;
+    logoImg.src = logo;
+    hackathonLogoImg.src = hackathonLogo;
 
-  doc.addImage(logoImg, 'PNG', margin + 10, 10, 30, 30);
-  doc.addImage(hackathonLogoImg, 'PNG', margin + 150, 10, 45, 30);
+    doc.addImage(logoImg, 'PNG', margin + 10, 10, 30, 30);
+    doc.addImage(hackathonLogoImg, 'PNG', margin + 140, 10, 45, 30);
     doc.text(`Skenirajte QR code da biste provjerili E-diplomu!`, margin + 15 , 290);
     doc.text(`Generirano od strane BlockGrade-a`, margin + 120 , 290);
 
-
-    doc.save('diploma.pdf');
+    doc.autoPrint(); // Automatically prints the PDF
+    window.open(doc.output('bloburl'), '_blank'); // Opens the PDF in a new tab for printing
 };
 
   return (
@@ -151,7 +151,7 @@ const EDiploma = () => {
                   <thead>
                     <tr>
                       <th>Predmet</th>
-                      <th>Ocjena</th>
+                      <th>Ocijena</th>
                     </tr>
                   </thead>
                   <tbody>
