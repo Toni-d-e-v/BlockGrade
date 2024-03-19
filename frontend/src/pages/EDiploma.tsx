@@ -115,7 +115,7 @@ const EDiploma = () => {
     hackathonLogoImg.src = hackathonLogo;
 
     doc.addImage(logoImg, 'PNG', margin + 10, 10, 30, 30);
-    doc.addImage(hackathonLogoImg, 'PNG', margin + 140, 10, 45, 30);
+    doc.addImage(hackathonLogoImg, 'PNG', margin + 140, 10, 55.14, 30);
     doc.text(`Skenirajte QR code da biste provjerili E-diplomu!`, margin + 15 , 290);
     doc.text(`Generirano od strane BlockGrade-a`, margin + 120 , 290);
 
@@ -133,15 +133,15 @@ const EDiploma = () => {
           <ul>
             <div className="center-part">
               <div className="name-section">
-                <h4>Ime i Prezime:</h4>
+                <h4>Ime i Prezime:&nbsp;</h4>
                 <p>{state.Certificate[0]}</p>
               </div>
               <div className="description-section">
-                <h4>Opis:</h4>
+                <h4>Opis:&nbsp;</h4>
                 <p>{state.Certificate[1]}</p>
               </div>
               <div className="school-section">
-                <h4>Škola:</h4>
+                <h4>Škola:&nbsp;</h4>
                 <p>{state.Certificate[2]}</p>
               </div>
             </div>

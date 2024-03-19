@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import obiteljSVG from '../assets/obitelj.svg';
 import profesorSVG from '../assets/profesor.svg';
+import logo from '../assets/logo.png'
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
 const Main = () => {
@@ -22,9 +23,10 @@ const Main = () => {
     </div>
 
     <div style={containerStyle}>
+      
 
       <div style={boxStyle}>
-          <img src={obiteljSVG} alt="Obitelj" style={{ width: '200px', height: '550px' }} />
+          <img src={obiteljSVG} alt="Obitelj" style={{ width: '200px', height: '550px'}} />
           Zelim vidjeti E-Diplomu
           <input 
             style={{
@@ -65,14 +67,15 @@ const Main = () => {
 
     <div style={footerStyle}>
       <div>
-      <a href="https://github.com/Toni-d-e-v/BlockGrade">Github </a> 
-        BlockGrade - E-diplome - Projekat za sum.ba Code Challenge 2024
+      <a href="https://github.com/Toni-d-e-v/BlockGrade">Github</a> 
+      &nbsp;BlockGrade - E-diplome - Projekt za sum.ba Code Challenge 2024
       </div>
       <button 
                 onClick={
                     () => window.location = "/direktor"
                 }
         style={buttonStyle_2}>Direktor Panel</button>
+        
     </div>
     </div>
 
