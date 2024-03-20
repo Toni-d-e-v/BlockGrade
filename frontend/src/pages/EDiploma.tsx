@@ -74,7 +74,7 @@ const EDiploma = () => {
     doc.text(`Ravnatelj: ${replaceCroatianLetters(state.Certificate[3][0])}`, margin + 10, startY + 60);
 
     // Add table for subjects
-    const tableColumns = ['Predmet', 'Ocijena'];
+    const tableColumns = ['Predmet', 'Ocjena'];
     const tableRows = [];
     if (state.Certificate[4] && state.Certificate[5]) {
         state.Certificate[4].forEach((subject, index) => {
@@ -151,7 +151,7 @@ const EDiploma = () => {
                   <thead>
                     <tr>
                       <th>Predmet</th>
-                      <th>Ocijena</th>
+                      <th>Ocjena</th>
                     </tr>
                   </thead>
                   <tbody>
