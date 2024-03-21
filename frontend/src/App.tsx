@@ -5,6 +5,7 @@ import Direktor from './pages/Direktor';
 import EDiploma from './pages/EDiploma';
 import Info from './pages/Info';
 import { MetaMaskProvider } from '@metamask/sdk-react';
+import { ThemeProvider } from "@/components/theme-provider"
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -21,8 +22,9 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* Conditionally render the content based on the loading state */}
-      <Routes>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            {/* Conditionally render the content based on the loading state */}
+            <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/direktor" element={<Direktor />} />
         <Route
@@ -31,6 +33,8 @@ const App = () => {
         />
         <Route path="/info" element={<Info />} />
       </Routes>
+    </ThemeProvider>
+
     </div>
   );
 };

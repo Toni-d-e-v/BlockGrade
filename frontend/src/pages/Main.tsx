@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Moon, Sun } from "lucide-react"
 import obiteljSVG from '../assets/obitelj.svg';
 import profesorSVG from '../assets/profesor.svg';
 import logo from '../assets/logo.png'
@@ -16,6 +17,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useTheme } from "@/components/theme-provider"
 
 import { Input } from "@/components/ui/input"
 import "../index.css"
@@ -26,7 +34,7 @@ const Main = () => {
   const [code, setCode] = useState('');
   const [latestEvents, setLatestEvents] = useState([]);
   
-
+  const { setTheme } = useTheme()
   const { toast } = useToast()
   return (
     
@@ -111,6 +119,26 @@ const Main = () => {
           <img src={githubLogo} alt="Github Logo" width="30" className='mr-2' />
           Github
         </Button>
+        <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
+          System
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
         <p className="ml-10 text-foreground"> BlockGrade - E-diplome - Projekt za sum.ba Code Challenge 2024 </p>
       </footer>
       <Toaster />
