@@ -42,7 +42,7 @@ const Main = () => {
     <div className="bg-background" style={{ width: "100%", height: "100%" }}>
 
       <header className='flex justify-center p-10'>
-        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl ">BlockGrade - E-Diploma</h1>
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl text-foreground">BlockGrade - E-Diploma</h1>
       </header>
 
       <Button variant="" className="text-base"
