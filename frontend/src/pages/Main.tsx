@@ -4,150 +4,190 @@ import profesorSVG from '../assets/profesor.svg';
 import logo from '../assets/logo.png'
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+import { Input } from "@/components/ui/input"
+import "../index.css"
+import githubLogo from "../assets/github-mark.svg"
+
+
 const Main = () => {
   const [code, setCode] = useState('');
   const [latestEvents, setLatestEvents] = useState([]);
+  
 
-
+  const { toast } = useToast()
   return (
-
-    <div
-    style={{
-      backgroundColor: 'white',
-      width: '100%'
-    }}
-    >
     
-    <div style={headerStyle}>
-        BlockGrade - E-Diploma
-    </div>
 
-    <div style={containerStyle}>
-      
+    <div className="bg-background" style={{ width: "100%", height: "100%" }}>
 
-      <div style={boxStyle}>
-          <img src={obiteljSVG} alt="Obitelj" style={{ width: '200px', height: '550px'}} />
-          Zelim vidjeti E-Diplomu
-          <input 
-            style={{
-              
-            }}
-            type="text" // Assuming it's a text input
-            value={code} // Use state or a variable to store the input value
-            onChange={(e) => setCode(e.target.value)} // Update the state or variable on input change
-            placeholder='ID diplome'
-          />
-          <button 
-            onClick={() => window.location = `/ediploma?code=${code}`} // Pass the code value to the URL
-            style={buttonStyle}
-          >
-            Nastavi
-          </button>
-        </div>
-        <div style={boxStyle}>
-        <h2>Kako radi?</h2>
-       
-      
-       
-        Sustav koristi prednosti blockchain tehnologije kako bi osigurao  neizmjenjivost izdanih diploma.
- 
-          <p></p>
-        BlockGrade koristi Ethereum blockchain kako bi omogućio visoku razinu transparentnosti. 
-        <a
-        href='/info'
-        >
-        Dodatne informacije
-        </a>
-        <p className="signature_verify"> 
-        Blockchain provjereno! 
-        </p>
+      <header className='flex justify-center p-10'>
+        <h1 className="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl ">BlockGrade - E-Diploma</h1>
+      </header>
 
-      </div>
-    </div>
+      <Button variant="" className="text-base"
+        onClick={
+          () => window.location = "/direktor"
+        }
+      >Direktor Panel</Button>
 
-    <div style={footerStyle}>
-      <div>
-      <a href="https://github.com/Toni-d-e-v/BlockGrade">Github</a> 
-      &nbsp;BlockGrade - E-diplome - Projekt za sum.ba Code Challenge 2024
-      </div>
-      <button 
-                onClick={
-                    () => window.location = "/direktor"
+      <div className='flex justify-center items-center h-[60vh]'>
+
+        <Card className='m-5' style={{ width: "17rem" }}>
+          <CardHeader>
+            <img src={obiteljSVG} alt="Obitelj" />
+            <CardTitle>Zelim vidjeti <br></br>E-Diplomu</CardTitle>
+            <CardDescription></CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Input
+              type="text" // Assuming it's a text input
+              value={code} // Use state or a variable to store the input value
+              onChange={(e) => setCode(e.target.value)} // Update the state or variable on input change
+              placeholder='ID diplome'
+            />
+            <Button className='m-5'
+              onClick={() => {
+                if (code) {
+                  window.location = `/ediploma?code=${code}`;
                 }
-        style={buttonStyle_2}>Direktor Panel</button>
-        
-    </div>
+                else {
+                  toast({
+                    variant: "destructive",
+                    title: "Pogrešan ID",
+                    description: "Unesite ID Diplome",
+                  })
+                }
+              }}
+            >
+              Nastavi
+            </Button>
+          </CardContent>
+          <CardFooter>
+          </CardFooter>
+        </Card>
+
+
+
+        <Card className="m-5" style={{ width: "17rem", }}>
+          <CardHeader>
+            <CardTitle>Kako radi?</CardTitle>
+
+          </CardHeader>
+          <CardContent>
+            <p>Sustav koristi prednosti blockchain tehnologije kako bi osigurao  neizmjenjivost izdanih diploma.</p>
+            <br></br>
+            <p>BlockGrade koristi Ethereum blockchain kako bi omogućio visoku razinu transparentnosti. </p>
+            <Button className='m-5' variant="secondary"><a
+              href='/info'
+            >
+              Dodatne informacije
+            </a></Button>
+
+
+            <p className="signature_verify">
+              Blockchain provjereno!
+            </p>
+          </CardContent>
+
+        </Card>
+
+
+      </div>
+      <footer className='flex justify-center items-center p-5 absolute bottom-0 w-full'>
+        <Button onClick={() => window.location = "https://github.com/Toni-d-e-v/BlockGrade"} variant="secondary">
+          <img src={githubLogo} alt="Github Logo" width="30" className='mr-2' />
+          Github
+        </Button>
+        <p className="ml-10 text-foreground"> BlockGrade - E-diplome - Projekt za sum.ba Code Challenge 2024 </p>
+      </footer>
+      <Toaster />
+
     </div>
 
   );
 };
 
+// Stari style-ovi koji se vise ne koriste
+
 const containerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '60vh',
-  };
-  
-  const boxStyle = {
-    width: '250px',
-    height: '300px',
-    backgroundColor: '#fff',
-    border: '2px solid #3498db',
-    borderRadius: '8px',
-    margin: '0 10px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '25px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  };
-  
-  const buttonStyle = {
-    marginTop: '10px',
-    padding: '8px 16px',
-    backgroundColor: '#3498db',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-  };
-  const buttonStyle_2 = {
-    padding: '8px 8px',
-    margin: '5px',
-    backgroundColor: '#3498db',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '6px',
-    cursor: 'pointer',
-  };
-  // Responsive styles
-  const mediaQuery = `@media (max-width: 768px) {
-    ${boxStyle} {
-      width: 80%;
-    }
-  }`;
-  const headerStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '60vh',
+};
 
-    backgroundColor: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: '14vh',
-    fontSize: '4vh',
-    borderRadius: '10px',
-    padding: '20px'
-  };
-  const footerStyle = {
+const boxStyle = {
+  width: '250px',
+  height: '300px',
+  backgroundColor: '#fff',
+  border: '2px solid #3498db',
+  borderRadius: '8px',
+  margin: '0 10px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '25px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+};
 
-    backgroundColor: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: '10vh',
-    marginBottom: '25px',
-    borderRadius: '10px',
-    padding: '10px'
+const buttonStyle = {
+  marginTop: '10px',
+  padding: '8px 16px',
+  backgroundColor: '#3498db',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '6px',
+  cursor: 'pointer',
+};
+const buttonStyle_2 = {
+  padding: '8px 8px',
+  margin: '5px',
+  backgroundColor: '#3498db',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '6px',
+  cursor: 'pointer',
+};
+// Responsive styles
+const mediaQuery = `@media (max-width: 768px) {
+  ${boxStyle} {
+    width: 80%;
+  }
+}`;
+const headerStyle = {
 
-  };
+  backgroundColor: '#fff',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginTop: '14vh',
+  fontSize: '4vh',
+  borderRadius: '10px',
+  padding: '20px'
+};
+const footerStyle = {
+
+  backgroundColor: '#fff',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginTop: '10vh',
+  marginBottom: '25px',
+  borderRadius: '10px',
+  padding: '10px'
+
+};
 export default Main;
