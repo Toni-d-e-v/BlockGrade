@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.9;
 
 contract UvjerenjeUgovor {
 
@@ -12,10 +12,11 @@ contract UvjerenjeUgovor {
     struct Uvjerenje {
         string imeNositelja;
         string opis;
-        string imeSkole; // Promijenjeno polje na razini uvjerenja
+        string imeSkole; 
         Ravnatelj ravnatelj;
         string[] predmeti;
         uint8[] ocjene;
+        uint256 datum;
     }
 
     address public vlasnik;
@@ -60,9 +61,9 @@ contract UvjerenjeUgovor {
         novoUvjerenje.ravnatelj = ravnatelj;
         novoUvjerenje.predmeti = predmeti;
         novoUvjerenje.ocjene = ocjene;
+        novoUvjerenje.datum = block.timestamp;
 
         ravnateljUvjerenja[msg.sender].push(id);
-
         emit UvjerenjeIzdano(msg.sender, id, imeNositelja, opis, predmeti, ocjene);
     }
 
@@ -71,24 +72,25 @@ contract UvjerenjeUgovor {
     }
 
     function dohvatiUvjerenje(bytes8 id) external view returns (
-            string memory imeNositelja,
-            string memory opis,
-            string memory imeSkole,
-            Ravnatelj memory ravnatelj,
-            string[] memory predmeti,
-            uint8[] memory ocjene
-    ) 
-    {
-    
-    storage uvjerenje = uvjerenja[id];
+        string memory imeNositelja,
+        string memory opis,
+        string memory imeSkole,
+        Ravnatelj memory ravnatelj,
+        string[] memory predmeti,
+        uint8[] memory ocjene,
+        uint256 datum
+    ){
+        Uvjerenje storage uvjerenje = uvjerenja[id];
 
-    return (
-        uvjerenje.imeNositelja,
-        uvjerenje.opis,
-        uvjerenje.imeSkole,
-        uvjerenje.ravnatelj,
-        uvjerenje.predmeti,
-        uvjerenje.ocjene
-    );
-}
+        return (
+            uvjerenje.imeNositelja,
+            uvjerenje.opis,
+            uvjerenje.imeSkole,
+            uvjerenje.ravnatelj,
+            uvjerenje.predmeti,
+            uvjerenje.ocjene,
+            uvjerenje.datum 
+        );
+    }
+
 }
