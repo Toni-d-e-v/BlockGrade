@@ -3,6 +3,8 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 import BlockGradeABI from '../../BlockGrade.json';
 import './Direktor.css'
+import { Button } from '@/components/ui/button';
+import { SimpleFooter } from '@/components/footer';
 const Direktor = () => {
   const initialState = { accounts: [], chainId: null };
   const [wallet, setWallet] = useState(initialState);
@@ -163,7 +165,7 @@ const Direktor = () => {
         {connected ? (
             <button className="button-17"  onClick={handleDisconnect}>Disconnect</button>
         ) : (
-          <button className="button-17" onClick={handleConnect}>Connect MetaMask</button>
+          <Button onClick={handleConnect}>Connect MetaMask</Button>
         )}
         </h2>
  
@@ -263,6 +265,7 @@ const Direktor = () => {
 
         </div>
       )}
+      <SimpleFooter></SimpleFooter>
     </div>
   );
 };

@@ -21,19 +21,19 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App bg-background h-full w-full">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            {/* Conditionally render the content based on the loading state */}
-            <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/direktor" element={<Direktor />} />
-        <Route
-          path="/ediploma"
-          element=              {<EDiploma />}
-        />
-        <Route path="/info" element={<Info />} />
-      </Routes>
-    </ThemeProvider>
+        {/* Conditionally render the content based on the loading state */}
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/direktor" element={<Direktor />} />
+          <Route
+            path="/ediploma"
+            element={<EDiploma />}
+          />
+          <Route path="/info" element={<Info />} />
+        </Routes>
+      </ThemeProvider>
 
     </div>
   );

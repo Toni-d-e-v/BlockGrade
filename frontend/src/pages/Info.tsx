@@ -21,19 +21,18 @@ const Info = () => {
 
   return (
 
-    <div className='bg-background'
-      style={{
-        width: '100%',
-        height: "100%"
-      }}
-    >
-<SimpleHeader></SimpleHeader>
+    <div className='w-screen h-screen'>
+      <SimpleHeader>
+      <div className="flex justify-center">
       <Button
-          onClick={() => window.location = `/`}>
-          Nazad
-        </Button>
-      <div style={containerStyle}>
-        <Card className="m-5" style={{ width: "17rem", height: "55vh" }}>
+        onClick={() => window.location.assign(`/`)}>
+        Nazad
+      </Button>
+      </div>
+      </SimpleHeader>
+      
+      <div className="flex justify-center items-center h-2/3 py-14 gap-10">
+        <Card className="h-full" style={{ width: "17rem"}}>
           <CardHeader>
             <CardTitle>Transparentnost Blockchaina</CardTitle>
           </CardHeader>
@@ -47,7 +46,7 @@ const Info = () => {
           <CardContent>Blockchain osigurava neporecivost i neizmjenjivost izdanih diploma s jedinstvenim identifikatorom.</CardContent>
         </Card>
 
-        <Card className="m-5" style={{ width: "17rem", height: "55vh"}}>
+        <Card className=" h-full" style={{ width: "17rem"}}>
           <CardHeader>
             <CardTitle>Automatizacija Izdavanja Uvjerenja</CardTitle>
           </CardHeader>
@@ -61,25 +60,28 @@ const Info = () => {
           <CardContent>Svako uvjerenje je povezano s identitetom ravnatelja, pridonoseći sigurnosti i povjerenju u ispravnost podataka.</CardContent>
         </Card>
 
-        <Card className="m-5" style={{ width: "17rem", height: "55vh" }}>
+        <Card className=" h-full" style={{ width: "17rem"}}>
           <CardHeader>
             <CardTitle>Dodatne informacije</CardTitle>
           </CardHeader>
           <CardContent>
             Ovdje možete dodati dodatne informacije o sustavu BlockGrade.
+
+
           </CardContent>
           <CardHeader>
             <CardTitle>Linkovi</CardTitle>
-
           </CardHeader>
           <CardContent>
             <ul>
-
-              
               <Button variant={"link"}><li><a href="https://docs.google.com/presentation/d/1lFtP7JAIdi0TmIeXEr87uiyQ4m_X6nZSoZcjwSH7ovM/">Prezentacija</a></li></Button>
               <Button variant={"link"}><li><a href="https://block-grade.vercel.app/ediploma?code=4891aff173ac1187">Primjer E-diplome</a></li></Button>
             </ul>
           </CardContent>
+
+
+
+
           <CardHeader>
             <CardTitle>Autori</CardTitle>
           </CardHeader>

@@ -49,3 +49,18 @@
     --ring: 224.3 76.3% 48%;
   }
 }
+
+
+/* override browser default */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* use viewport-relative units to cover page fully */
+body {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}

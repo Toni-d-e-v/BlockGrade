@@ -34,7 +34,7 @@ const EDiploma = () => {
       return Certificate;
     } catch (error) {
       console.error('Error fetching Certificate:', error.message || error);
-      window.location = '/'
+      window.location.assign('/')
 
       return [];
     }

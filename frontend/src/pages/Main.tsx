@@ -39,25 +39,28 @@ const Main = () => {
   const { setTheme } = useTheme()
   const { toast } = useToast()
   return (
-    
+    <div className='flex flex-col justify-between h-screen w-screen'>
 
-    <div className="bg-background" style={{ width: "100%", height: "100%" }}>
 
-      <SimpleHeader></SimpleHeader>
 
-      <Button variant="" className="text-base"
+      <SimpleHeader>
+      <div className = "flex justify-center">
+
+      <Button size="lg"
         onClick={
-          () => window.location = "/direktor"
+          () => window.location.assign("/direktor")
         }
       >Direktor Panel</Button>
+      </div>
+      </SimpleHeader>
 
-      <div className='flex justify-center items-center h-[60vh]'>
 
-        <Card className='m-5' style={{ width: "17rem", height: "26rem"}}>
+      <div className='flex justify-center items-center gap-20'>
+
+        <Card className="w-64 h-full">
           <CardHeader>
-            <img src={obiteljSVG} alt="Obitelj" />
-            <CardTitle>Zelim vidjeti <br></br>E-Diplomu</CardTitle>
-            <CardDescription></CardDescription>
+            <img src={obiteljSVG} alt="Obitelj"/>
+            <CardTitle className='text-center'>Zelim vidjeti <br></br>E-Diplomu</CardTitle>
           </CardHeader>
           <CardContent>
             <Input
@@ -66,10 +69,13 @@ const Main = () => {
               onChange={(e) => setCode(e.target.value)} // Update the state or variable on input change
               placeholder='ID diplome'
             />
-            <Button className='m-5'
+            
+          </CardContent>
+          <CardFooter className='justify-center'>
+          <Button
               onClick={() => {
                 if (code) {
-                  window.location = `/ediploma?code=${code}`;
+                  window.location.assign(`/ediploma?code=${code}`);
                 }
                 else {
                   toast({
@@ -82,43 +88,39 @@ const Main = () => {
             >
               Nastavi
             </Button>
-          </CardContent>
-          <CardFooter>
           </CardFooter>
         </Card>
 
 
 
-        <Card className="m-5" style={{ width: "17rem", height: "26rem" }}>
+        <Card className="w-64 h-full">
           <CardHeader>
             <CardTitle>Kako radi?</CardTitle>
-
           </CardHeader>
           <CardContent>
             <p>Sustav koristi prednosti blockchain tehnologije kako bi osigurao  neizmjenjivost izdanih diploma.</p>
             <br></br>
             <p>BlockGrade koristi Ethereum blockchain kako bi omogućio visoku razinu transparentnosti. </p>
-            <Button className='m-5' variant="secondary"><a
-              href='/info'
-            >
+            
+          </CardContent>
+          <CardFooter className='flex-col'>
+          <Button className='m-5' variant="secondary" onClick={() => {
+              window.location.assign("/info")
+            }}>
               Dodatne informacije
-            </a></Button>
-
-
+            </Button>
             <p className="signature_verify">
               Blockchain provjereno!
             </p>
-          </CardContent>
-
+          </CardFooter>
         </Card>
 
 
       </div>
-<SimpleFooter></SimpleFooter>
       <Toaster />
+<SimpleFooter></SimpleFooter>
 
-    </div>
-
+</div>
   );
 };
 
