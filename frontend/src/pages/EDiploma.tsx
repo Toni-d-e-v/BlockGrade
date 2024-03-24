@@ -179,16 +179,23 @@ const EDiploma = () => {
               </TableRow>
             </TableHeader>
             <TableBody >
-              {state.Certificate[4].map((subject, index) => (
-                <TableRow key={index}>
-                  {state.Certificate[5] && state.Certificate[5][index] && (
-                    <>
-                      <TableCell className='p-2'>{subject}</TableCell>
-                      <TableCell className='p-2'>{Number(state.Certificate[5][index])}</TableCell>
-                    </>
-                  )}
-                </TableRow>
-              ))}
+            {state.Certificate[4] ? (
+  state.Certificate[4].map((subject, index) => (
+    <TableRow key={index}>
+      {state.Certificate[5] && state.Certificate[5][index] && (
+        <>
+          <TableCell className='p-2'>{subject}</TableCell>
+          <TableCell className='p-2'>{Number(state.Certificate[5][index])}</TableCell>
+        </>
+      )}
+    </TableRow>
+  ))
+) : (
+  <TableRow>
+    <TableCell colSpan={2} className='p-2'>Loading...</TableCell>
+  </TableRow>
+)}
+
             </TableBody>
           </Table>
         </CardContent>
