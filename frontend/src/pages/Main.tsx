@@ -39,7 +39,7 @@ const Main = () => {
   const { setTheme } = useTheme()
   const { toast } = useToast()
   return (
-    <div className='flex flex-col justify-between h-screen w-screen'>
+    <div className='flex flex-col justify-between min-h-full min-w-full'>
 
 
 
@@ -55,7 +55,7 @@ const Main = () => {
       </SimpleHeader>
 
 
-      <div className='flex justify-center items-center gap-20'>
+      <div className='grid grid-flow-col justify-center items-center gap-20 h-2/3 my-20'>
 
         <Card className="w-64 h-full">
           <CardHeader>

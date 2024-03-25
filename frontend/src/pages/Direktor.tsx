@@ -5,7 +5,11 @@ import BlockGradeABI from '../../BlockGrade.json';
 import './Direktor.css'
 import { Button } from '@/components/ui/button';
 import { SimpleFooter } from '@/components/footer';
+import { SimpleHeader } from '@/components/header';
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
 const Direktor = () => {
+  const { toast } = useToast()
   const initialState = { accounts: [], chainId: null };
   const [wallet, setWallet] = useState(initialState);
   const [connected, setConnected] = useState(false);
@@ -85,12 +89,20 @@ const Direktor = () => {
         setCurrentScreen(1);
       } catch (error) {
         console.error('Error connecting to MetaMask:', error.message || error);
-        alert('Greksa sa povezivanjem!')
+        toast({
+          variant: "destructive",
+          title: "Greksa sa povezivanjem!",
+          description: "",
+        })
 
       }
     } else {
       console.error('MetaMask extension not detected');
-      alert('Nemate MetaMask instaliran!')
+      toast({
+        variant: "destructive",
+        title: "Nemate MetaMask instaliran!",
+        description: "",
+      })
     }
   };
 
@@ -150,7 +162,11 @@ const Direktor = () => {
         setCurrentScreen(2);
       } catch (error) {
         console.error('Error issuing certificate:', error.message || error);
-        alert("Molimo vas popunite sve!")
+        toast({
+          variant: "destructive",
+          title: "Molimo vas popunite sve!",
+          description: "",
+        })
       } finally {
         setLoading(false);
       }
@@ -159,96 +175,97 @@ const Direktor = () => {
 
   return (
     <div className={`App ${loading ? 'loading' : ''}`}>
-      <div className="header">
-        <h2>BlockGrade - E-diplome - Direktor sucelje
 
-        {connected ? (
-            <button className="button-17"  onClick={handleDisconnect}>Disconnect</button>
-        ) : (
-          <Button onClick={handleConnect}>Connect MetaMask</Button>
-        )}
-        </h2>
- 
-      </div>
+      <SimpleHeader>
+        <h2 className='text-2xl font-semibold leading-none tracking-tight text-foreground text-center'>Direktor Sučelje</h2>
+        <div className="flex justify-center">
+          {connected ? (
+            <Button size="lg" onClick={handleDisconnect}>Disconnect</Button>
+          ) : (
+            <Button size="lg" onClick={handleConnect}>Connect MetaMask</Button>
+          )}
+
+        </div>
+      </SimpleHeader>
 
       {currentScreen === 1 && connected && (
         <div>
-        <div className="Form">
-          <h3>Izdaj E-diplomu / E-uvjerenje</h3>
-          <label htmlFor="studentName">Ime i Prezime:</label>
-          <input
-            type="text"
-            id="studentName"
-            value={studentName}
-            onChange={(e) => setStudentName(e.target.value)}
-          />
-          <label htmlFor="description">Opis:</label>
-          <input
-            type="text"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <div className="Form">
+            <h3>Izdaj E-diplomu / E-uvjerenje</h3>
+            <label htmlFor="studentName">Ime i Prezime:</label>
+            <input
+              type="text"
+              id="studentName"
+              value={studentName}
+              onChange={(e) => setStudentName(e.target.value)}
+            />
+            <label htmlFor="description">Opis:</label>
+            <input
+              type="text"
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-          <table>
-            <thead>
-              <tr>
-                <th>Predmet</th>
-                <th>Ocijena</th>
-              </tr>
-            </thead>
-            <tbody>
-              {subjectRows.map((row, index) => (
-                <tr key={index}>
-                  <td style={{
-                    borderColor: 'white'
-                  }}>
-                    <input
-                      type="text"
-                      value={row.subject}
-                      onChange={(e) => handleSubjectChange(index, e.target.value)}
-                    />
-                  </td>
-                  <td
-                  style={{
-                    borderColor: 'white'
-                  }}
-                  >
-                    <input
-                      type="text"
-                      value={row.grade}
-                      onChange={(e) => handleGradeChange(index, e.target.value)}
-                    />
-                    
-                  </td>
-                  
-                  <button
-                    style={
-                      {
-                        marginLeft: "20px",
-                        backgroundColor: 'red'
-                      }
-                    }
-                    
-                     onClick={() => handleDeleteRow(index)}>X</button>
+            <table>
+              <thead>
+                <tr>
+                  <th>Predmet</th>
+                  <th>Ocijena</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {subjectRows.map((row, index) => (
+                  <tr key={index}>
+                    <td style={{
+                      borderColor: 'white'
+                    }}>
+                      <input
+                        type="text"
+                        value={row.subject}
+                        onChange={(e) => handleSubjectChange(index, e.target.value)}
+                      />
+                    </td>
+                    <td
+                      style={{
+                        borderColor: 'white'
+                      }}
+                    >
+                      <input
+                        type="text"
+                        value={row.grade}
+                        onChange={(e) => handleGradeChange(index, e.target.value)}
+                      />
 
-          <button className="button-17" onClick={handleAddRow}>Dodaj red</button>
-          <button className="button-17" onClick={issueCertificate} disabled={loading}>
-            {loading ? 'Loading...' : 'Izdaj uvjerenje'}
-          </button>
+                    </td>
+
+                    <button
+                      style={
+                        {
+                          marginLeft: "20px",
+                          backgroundColor: 'red'
+                        }
+                      }
+
+                      onClick={() => handleDeleteRow(index)}>X</button>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <Button onClick={handleAddRow}>Dodaj red</Button>
+            <Button onClick={issueCertificate} disabled={loading}>
+              {loading ? 'Loading...' : 'Izdaj uvjerenje'}
+            </Button>
 
 
-        </div>
-                  <p>
-                  Izdavanje uvjerenja moguće je samo putem ovlaštenih ADRESA!
-              </p>
-              <p>
-                  Svaka ADRESA je povezana s DIREKTOROM (IME, PREZIME, ŠKOLA).
-              </p>
+          </div>
+          <p>
+            Izdavanje uvjerenja moguće je samo putem ovlaštenih ADRESA!
+          </p>
+          <p>
+            Svaka ADRESA je povezana s DIREKTOROM (IME, PREZIME, ŠKOLA).
+          </p>
         </div>
       )}
 
@@ -257,14 +274,10 @@ const Direktor = () => {
         <div>
           <h3>Uvjerenje izdano!</h3>
           <p>Link: <a href={`/ediploma?code=${issuedCertificateId.substring(2)}`}>{issuedCertificateId.substring(2)}</a></p>
-          <button 
-                onClick={
-                    () => window.location = "/direktor"
-                }
-                className="button-17">Direktor Panel</button>
-
+          <Button onClick={() => window.location = "/direktor"}>Direktor Panel</Button>
         </div>
       )}
+      <Toaster />
       <SimpleFooter></SimpleFooter>
     </div>
   );

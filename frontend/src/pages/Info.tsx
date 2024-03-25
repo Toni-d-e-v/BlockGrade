@@ -21,7 +21,7 @@ const Info = () => {
 
   return (
 
-    <div className='w-screen h-screen'>
+    <div className='w-full h-full'>
       <SimpleHeader>
       <div className="flex justify-center">
       <Button
@@ -31,8 +31,8 @@ const Info = () => {
       </div>
       </SimpleHeader>
       
-      <div className="flex justify-center items-center h-2/3 py-14 gap-10">
-        <Card className="h-full" style={{ width: "17rem"}}>
+      <div className="flex justify-center gap-20 h-2/3 py-14 ">
+        <Card className="min-h-full w-72" style={{ width: ""}}>
           <CardHeader>
             <CardTitle>Transparentnost Blockchaina</CardTitle>
           </CardHeader>
@@ -46,7 +46,7 @@ const Info = () => {
           <CardContent>Blockchain osigurava neporecivost i neizmjenjivost izdanih diploma s jedinstvenim identifikatorom.</CardContent>
         </Card>
 
-        <Card className=" h-full" style={{ width: "17rem"}}>
+        <Card className="min-h-full w-72" style={{ width: ""}}>
           <CardHeader>
             <CardTitle>Automatizacija Izdavanja Uvjerenja</CardTitle>
           </CardHeader>
@@ -60,7 +60,7 @@ const Info = () => {
           <CardContent>Svako uvjerenje je povezano s identitetom ravnatelja, pridonoseći sigurnosti i povjerenju u ispravnost podataka.</CardContent>
         </Card>
 
-        <Card className=" h-full" style={{ width: "17rem"}}>
+        <Card className="min-h-full w-72" style={{ width: ""}}>
           <CardHeader>
             <CardTitle>Dodatne informacije</CardTitle>
           </CardHeader>
