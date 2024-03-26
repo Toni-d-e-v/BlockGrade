@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
 import {
   Table,
   TableBody,
@@ -114,6 +115,7 @@ const Direktor = () => {
       toast({
         variant: "destructive",
         title: "Nemate MetaMask instaliran!",
+        action: <ToastAction altText="Instaliraj"><a href='https://metamask.io' target="_blank" rel="noopener noreferrer">Instaliraj</a></ToastAction>,
         description: "",
       })
     }
