@@ -240,15 +240,14 @@ const Direktor = () => {
                 <TableBody>
                   {subjectRows.map((row, index) => (
                     <TableRow key={index}>
-                      <TableCell className='p-0'>
+                      <TableCell className='py-1'>
                         <Input
                           type="text"
                           value={row.subject}
                           onChange={(e) => handleSubjectChange(index, e.target.value)}>
                         </Input>
-
                       </TableCell>
-                      <TableCell className='py-0'
+                      <TableCell className=''
                       >
                         <Input className=''
                           type="text"
@@ -258,11 +257,15 @@ const Direktor = () => {
 
                       </TableCell>
 
-                      <Button size="icon" variant="destructive"
+                      <TableCell>
+                        <Button size="icon" variant="destructive"
+                          onClick={() => handleDeleteRow(index)}>
+                          <X />
+                        </Button>
 
-                        onClick={() => handleDeleteRow(index)}>
-                        <X />
-                      </Button>
+                      </TableCell>
+
+
                     </TableRow>
                   ))}
                 </TableBody>
@@ -270,12 +273,12 @@ const Direktor = () => {
             </CardContent>
             <CardFooter className='flex justify-between'>
 
-              
+
               <Button onClick={issueCertificate} disabled={loading}>
                 {loading ? 'Loading...' : 'Izdaj uvjerenje'}
               </Button>
               <Button className="bg-lime-500 hover:bg-lime-400" onClick={handleAddRow} size="icon">
-                <Plus/>
+                <Plus />
               </Button>
             </CardFooter>
 
