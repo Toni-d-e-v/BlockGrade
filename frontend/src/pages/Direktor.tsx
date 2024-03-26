@@ -6,8 +6,21 @@ import './Direktor.css'
 import { Button } from '@/components/ui/button';
 import { SimpleFooter } from '@/components/footer';
 import { SimpleHeader } from '@/components/header';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { CircleX, X } from "lucide-react"
+
 const Direktor = () => {
   const { toast } = useToast()
   const initialState = { accounts: [], chainId: null };
@@ -174,7 +187,7 @@ const Direktor = () => {
   };
 
   return (
-    <div className={`App ${loading ? 'loading' : ''}`}>
+    <div className={` ${loading ? 'loading' : ''}`}>
 
       <SimpleHeader>
         <h2 className='text-2xl font-semibold leading-none tracking-tight text-foreground text-center'>Direktor Sučelje</h2>
@@ -189,81 +202,82 @@ const Direktor = () => {
       </SimpleHeader>
 
       {currentScreen === 1 && connected && (
-        <div>
-          <div className="Form">
-            <h3>Izdaj E-diplomu / E-uvjerenje</h3>
-            <label htmlFor="studentName">Ime i Prezime:</label>
-            <input
-              type="text"
-              id="studentName"
-              value={studentName}
-              onChange={(e) => setStudentName(e.target.value)}
-            />
-            <label htmlFor="description">Opis:</label>
-            <input
-              type="text"
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+        <div className='flex justify-center flex-col items-center'>
+          <Card className="p-10 m-10 ">
+            <CardHeader>
+              <CardTitle>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Predmet</th>
-                  <th>Ocijena</th>
-                </tr>
-              </thead>
-              <tbody>
-                {subjectRows.map((row, index) => (
-                  <tr key={index}>
-                    <td style={{
-                      borderColor: 'white'
-                    }}>
-                      <input
+                <h3>Izdaj E-diplomu / E-uvjerenje</h3>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <label htmlFor="studentName">Ime i Prezime:</label>
+
+              <Input
+                type="text"
+                id="studentName"
+                value={studentName}
+                onChange={(e) => setStudentName(e.target.value)}>
+              </Input>
+
+              <label htmlFor="description">Opis:</label>
+              <Input
+                type="text"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}>
+              </Input>
+
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Predmet</TableHead>
+                    <TableHead>Ocijena</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {subjectRows.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell className='p-0'>
+                        <Input 
                         type="text"
-                        value={row.subject}
-                        onChange={(e) => handleSubjectChange(index, e.target.value)}
-                      />
-                    </td>
-                    <td
-                      style={{
-                        borderColor: 'white'
-                      }}
-                    >
-                      <input
-                        type="text"
-                        value={row.grade}
-                        onChange={(e) => handleGradeChange(index, e.target.value)}
-                      />
+                          value={row.subject}
+                          onChange={(e) => handleSubjectChange(index, e.target.value)}>
+                        </Input>
 
-                    </td>
+                      </TableCell>
+                      <TableCell className='py-0'
+                      >
+                        <Input className=''
+                          type="text"
+                          value={row.grade}
+                          onChange={(e) => handleGradeChange(index, e.target.value)}>
+                        </Input>
 
-                    <button
-                      style={
-                        {
-                          marginLeft: "20px",
-                          backgroundColor: 'red'
-                        }
-                      }
+                      </TableCell>
 
-                      onClick={() => handleDeleteRow(index)}>X</button>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      <Button size="icon" variant="destructive"
 
-            <Button onClick={handleAddRow}>Dodaj red</Button>
-            <Button onClick={issueCertificate} disabled={loading}>
-              {loading ? 'Loading...' : 'Izdaj uvjerenje'}
-            </Button>
+                        onClick={() => handleDeleteRow(index)}>
+                          <X />
+                        </Button>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+            <CardFooter className='flex justify-between'>
+
+              <Button onClick={handleAddRow}>Dodaj red</Button>
+              <Button onClick={issueCertificate} disabled={loading}>
+                {loading ? 'Loading...' : 'Izdaj uvjerenje'}
+              </Button>
+            </CardFooter>
 
 
-          </div>
-          <p>
-            Izdavanje uvjerenja moguće je samo putem ovlaštenih ADRESA!
-          </p>
-          <p>
+          </Card>
+          <p className="font-bold">
+            Izdavanje uvjerenja moguće je samo putem ovlaštenih ADRESA! <br></br>
             Svaka ADRESA je povezana s DIREKTOROM (IME, PREZIME, ŠKOLA).
           </p>
         </div>
@@ -274,7 +288,7 @@ const Direktor = () => {
         <div>
           <h3>Uvjerenje izdano!</h3>
           <p>Link: <a href={`/ediploma?code=${issuedCertificateId.substring(2)}`}>{issuedCertificateId.substring(2)}</a></p>
-          <Button onClick={() => window.location = "/direktor"}>Direktor Panel</Button>
+          <Button onClick={() => window.location.assign("/direktor")}>Direktor Panel</Button>
         </div>
       )}
       <Toaster />

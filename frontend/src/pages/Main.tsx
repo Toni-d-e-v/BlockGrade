@@ -39,7 +39,7 @@ const Main = () => {
   const { setTheme } = useTheme()
   const { toast } = useToast()
   return (
-    <div className='flex flex-col justify-between min-h-full min-w-full'>
+    <div className='flex flex-col justify-between'>
 
 
 
@@ -124,74 +124,4 @@ const Main = () => {
   );
 };
 
-// Stari style-ovi koji se vise ne koriste
-
-const containerStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '60vh',
-};
-
-const boxStyle = {
-  width: '250px',
-  height: '300px',
-  backgroundColor: '#fff',
-  border: '2px solid #3498db',
-  borderRadius: '8px',
-  margin: '0 10px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: '25px',
-  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-};
-
-const buttonStyle = {
-  marginTop: '10px',
-  padding: '8px 16px',
-  backgroundColor: '#3498db',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '6px',
-  cursor: 'pointer',
-};
-const buttonStyle_2 = {
-  padding: '8px 8px',
-  margin: '5px',
-  backgroundColor: '#3498db',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '6px',
-  cursor: 'pointer',
-};
-// Responsive styles
-const mediaQuery = `@media (max-width: 768px) {
-  ${boxStyle} {
-    width: 80%;
-  }
-}`;
-const headerStyle = {
-
-  backgroundColor: '#fff',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  marginTop: '14vh',
-  fontSize: '4vh',
-  borderRadius: '10px',
-  padding: '20px'
-};
-const footerStyle = {
-
-  backgroundColor: '#fff',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  marginTop: '10vh',
-  marginBottom: '25px',
-  borderRadius: '10px',
-  padding: '10px'
-
-};
 export default Main;

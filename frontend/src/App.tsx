@@ -21,7 +21,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App bg-background min-h-screen min-w-screen">
+    <div className="bg-background min-h-screen">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         {/* Conditionally render the content based on the loading state */}
         <Routes>
