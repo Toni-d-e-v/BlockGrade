@@ -55,7 +55,7 @@ const Main = () => {
       </SimpleHeader>
 
 
-      <div className='grid grid-flow-col justify-center items-center gap-20 h-2/3 my-20'>
+      <div className='grid md:grid-flow-col justify-center items-center gap-20 h-2/3 my-20'>
 
         <Card className="w-64 h-full">
           <CardHeader>

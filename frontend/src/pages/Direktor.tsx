@@ -19,7 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { CircleX, X } from "lucide-react"
+import { CircleX, X, Plus } from "lucide-react"
 
 const Direktor = () => {
   const { toast } = useToast()
@@ -239,8 +239,8 @@ const Direktor = () => {
                   {subjectRows.map((row, index) => (
                     <TableRow key={index}>
                       <TableCell className='p-0'>
-                        <Input 
-                        type="text"
+                        <Input
+                          type="text"
                           value={row.subject}
                           onChange={(e) => handleSubjectChange(index, e.target.value)}>
                         </Input>
@@ -259,8 +259,8 @@ const Direktor = () => {
                       <Button size="icon" variant="destructive"
 
                         onClick={() => handleDeleteRow(index)}>
-                          <X />
-                        </Button>
+                        <X />
+                      </Button>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -268,9 +268,12 @@ const Direktor = () => {
             </CardContent>
             <CardFooter className='flex justify-between'>
 
-              <Button onClick={handleAddRow}>Dodaj red</Button>
+              
               <Button onClick={issueCertificate} disabled={loading}>
                 {loading ? 'Loading...' : 'Izdaj uvjerenje'}
+              </Button>
+              <Button className="bg-lime-500 hover:bg-lime-400" onClick={handleAddRow} size="icon">
+                <Plus/>
               </Button>
             </CardFooter>
 

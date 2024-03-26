@@ -31,7 +31,7 @@ const Info = () => {
       </div>
       </SimpleHeader>
       
-      <div className="flex justify-center gap-20 h-2/3 py-14 ">
+      <div className="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-20 h-2/3 py-14 ">
         <Card className="min-h-full w-72" style={{ width: ""}}>
           <CardHeader>
             <CardTitle>Transparentnost Blockchaina</CardTitle>
