@@ -29,12 +29,9 @@ import { getCertificates } from "@/utils/getCertificates"
 import React, { useState, useEffect } from 'react';
 import { Moon, Sun } from "lucide-react"
 import obiteljSVG from '../assets/obitelj.svg';
-import profesorSVG from '../assets/profesor.svg';
-import logo from '../assets/logo.png'
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
 
-import githubLogo from "../assets/github-mark.svg"
 
 
 

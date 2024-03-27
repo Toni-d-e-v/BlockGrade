@@ -22,14 +22,11 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { getCertificates } from "@/utils/getCertificates"
 import { handlePrintDiploma } from "@/utils/handlePrintDiploma"
 import React, { useState, useEffect } from 'react';
-import jsPDF from 'jspdf';
-import qrImage from 'qr-image'; // Import qr-image library
+
 import { ethers, JsonRpcProvider } from 'ethers';
 import BlockGradeABI from '../../BlockGrade.json';
 import 'jspdf-autotable'; // Import jspdf-autotable
 
-import logo from '../assets/logo.png';
-import hackathonLogo from '../assets/logo-HACKATHON.png';
 
 
 const EDiploma = () => {

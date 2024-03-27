@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/card"
 
 import React, { useState, useEffect } from 'react';
-import obiteljSVG from '../assets/obitelj.svg';
-import profesorSVG from '../assets/profesor.svg';
 
 import { SimpleFooter } from '@/components/footer';
 import { SimpleHeader } from "@/components/header";
