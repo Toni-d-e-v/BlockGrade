@@ -1,10 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Moon, Sun } from "lucide-react"
-import obiteljSVG from '../assets/obitelj.svg';
-import profesorSVG from '../assets/profesor.svg';
-import logo from '../assets/logo.png'
-import { ethers, JsonRpcProvider } from 'ethers';
-import BlockGradeABI from '../../BlockGrade.json';
+// shadcn/ui Component Imports
+import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Toaster } from "@/components/ui/toaster"
@@ -23,13 +18,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useTheme } from "@/components/theme-provider"
 
-import { Input } from "@/components/ui/input"
-import "../index.css"
-import githubLogo from "../assets/github-mark.svg"
+
 import { SimpleFooter } from '@/components/footer';
 import { SimpleHeader } from '@/components/header';
+import { useTheme } from "@/components/theme-provider"
+
+
+import { getCertificates } from "@/utils/getCertificates"
+import React, { useState, useEffect } from 'react';
+import { Moon, Sun } from "lucide-react"
+import obiteljSVG from '../assets/obitelj.svg';
+import profesorSVG from '../assets/profesor.svg';
+import logo from '../assets/logo.png'
+import { ethers, JsonRpcProvider } from 'ethers';
+import BlockGradeABI from '../../BlockGrade.json';
+
+import githubLogo from "../assets/github-mark.svg"
+
 
 
 const Main = () => {
@@ -38,6 +44,10 @@ const Main = () => {
   
   const { setTheme } = useTheme()
   const { toast } = useToast()
+
+
+      const provider = new JsonRpcProvider('https://rpc.tornadoeth.cash/goerli');
+
   return (
     <div className='flex flex-col justify-between'>
 
@@ -73,21 +83,23 @@ const Main = () => {
           </CardContent>
           <CardFooter className='justify-center'>
           <Button
-              onClick={() => {
-                if (code) {
-                  window.location.assign(`/ediploma?code=${code}`);
-                }
-                else {
-                  toast({
-                    variant: "destructive",
-                    title: "Pogrešan ID",
-                    description: "Unesite ID Diplome",
-                  })
-                }
-              }}
-            >
-              Nastavi
-            </Button>
+    onClick={async () => {
+        try {
+            await getCertificates(provider, code);
+            window.location.assign(`/ediploma?code=${code}`);
+        } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Pogrešan ID",
+                description: "Molimo unesite ispravan ID Diplome",
+            })
+        }
+    }}
+>
+    Nastavi
+</Button>
+
+
           </CardFooter>
         </Card>
 
@@ -109,7 +121,7 @@ const Main = () => {
             }}>
               Dodatne informacije
             </Button>
-            <p className="signature_verify">
+            <p>
               Blockchain provjereno!
             </p>
           </CardFooter>

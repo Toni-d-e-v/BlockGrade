@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import detectEthereumProvider from '@metamask/detect-provider';
-import Web3 from 'web3';
-import BlockGradeABI from '../../BlockGrade.json';
-import './Direktor.css'
+// shadcn/ui Component Imports
 import { Button } from '@/components/ui/button';
-import { SimpleFooter } from '@/components/footer';
-import { SimpleHeader } from '@/components/header';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Toaster } from "@/components/ui/toaster"
@@ -20,6 +14,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+
+
+
+import React, { useState, useEffect } from 'react';
+import detectEthereumProvider from '@metamask/detect-provider';
+import Web3 from 'web3';
+import BlockGradeABI from '../../BlockGrade.json';
+import { SimpleFooter } from '@/components/footer';
+import { SimpleHeader } from '@/components/header';
+
+
 import { CircleX, X, Plus } from "lucide-react"
 
 const Direktor = () => {

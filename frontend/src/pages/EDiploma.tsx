@@ -1,12 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import jsPDF from 'jspdf';
-import qrImage from 'qr-image'; // Import qr-image library
-import { ethers, JsonRpcProvider } from 'ethers';
-import BlockGradeABI from '../../BlockGrade.json';
-import { Skeleton } from "@/components/ui/skeleton"
-
-import logo from '../assets/logo.png';
-import hackathonLogo from '../assets/logo-HACKATHON.png';
+// shadcn/ui Component Imports
 import {
   Card,
   CardContent,
@@ -25,8 +17,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Skeleton } from "@/components/ui/skeleton"
 
+import { getCertificates } from "@/utils/getCertificates"
+import { handlePrintDiploma } from "@/utils/handlePrintDiploma"
+import React, { useState, useEffect } from 'react';
+import jsPDF from 'jspdf';
+import qrImage from 'qr-image'; // Import qr-image library
+import { ethers, JsonRpcProvider } from 'ethers';
+import BlockGradeABI from '../../BlockGrade.json';
 import 'jspdf-autotable'; // Import jspdf-autotable
+
+import logo from '../assets/logo.png';
+import hackathonLogo from '../assets/logo-HACKATHON.png';
 
 
 const EDiploma = () => {
@@ -36,111 +39,25 @@ const EDiploma = () => {
 
   useEffect(() => {
     const connectToBlockchain = async () => {
-      const provider = new JsonRpcProvider('https://rpc.tornadoeth.cash/goerli');
-      const Certificate = await getCertificates(provider, id);
-      setInitialState({ Certificate });
+        const provider = new JsonRpcProvider('https://rpc.tornadoeth.cash/goerli');
+        try {
+            const Certificate = await getCertificates(provider, id);
+            setInitialState({ Certificate });
+        } catch (error) {
+            window.location = '/'; // Redirect to root on error
+        }
     };
 
     connectToBlockchain();
-  }, [id]);
+}, [id]);
+
 
   const [state, setInitialState] = useState(initialState);
 
-  const getCertificates = async (provider, id) => {
-    try {
-      const blockGradeContract = new ethers.Contract(
-        '0xf7109ebbe9e8fdaee66a8806c6645cb0bfe31f71',
-        BlockGradeABI.abi,
-        provider
-      );
-      const Certificate = await blockGradeContract.dohvatiUvjerenje('0x' + id);
-      console.log(Certificate, '0x' + id);
-      return Certificate;
-    } catch (error) {
-      console.error('Error fetching Certificate:', error.message || error);
-      window.location = '/';
-      return [];
-    }
-  };
-  const replaceCroatianLetters = (text) => {
-    const croatianLetters = {
-      "č": "c", "Č": "C",
-      "ć": "c", "Ć": "C",
-      "ž": "z", "Ž": "Z",
-      "š": "s", "Š": "S",
-      "đ": "dj", "Đ": "Dj",
-    };
-    return text.replace(/[čćžšđ]/g, (letter) => croatianLetters[letter] || letter);
-  }
-  const handlePrintDiploma = () => {
-    const doc = new jsPDF();
-    const margin = 10;
-    const startY = 20;
+  
 
-    // Add header
-    doc.setFontSize(18);
-    doc.setTextColor(44, 62, 80);
-    doc.text('Blockgrade - E-diploma', 105, startY + 10, { align: 'center' });
+  
 
-    // Add diploma information
-    doc.setFontSize(12);
-    doc.setTextColor(44, 62, 80);
-
-    doc.text(`Ime i Prezime: ${replaceCroatianLetters(state.Certificate[0])}`, margin + 10, startY + 30);
-    doc.text(`Opis: ${replaceCroatianLetters(state.Certificate[1])}`, margin + 10, startY + 40);
-    const certificateText = `Škola: ${replaceCroatianLetters(state.Certificate[2])}`;
-    doc.text(certificateText, margin + 10, startY + 50);
-    doc.text(`Ravnatelj: ${replaceCroatianLetters(state.Certificate[3][0])}`, margin + 10, startY + 60);
-
-    // Add table for subjects
-    const tableColumns = ['Predmet', 'Ocjena'];
-    const tableRows = [];
-    if (state.Certificate[4] && state.Certificate[5]) {
-      state.Certificate[4].forEach((subject, index) => {
-        const grade = state.Certificate[5][index] || '';
-        tableRows.push([subject, grade]);
-      });
-
-      const tableWidth = 90 * tableColumns.length + 50; // Calculate total table width
-      const tableX = (doc.internal.pageSize.getWidth() - tableWidth) / 2; // Calculate X position to center the table
-
-      const tableHeight = doc.autoTable.previous.finalY - startY + 40;
-      const tableY = startY + 70;
-
-      doc.autoTable({
-        head: [tableColumns],
-        body: tableRows,
-        startY: tableY,
-        margin: { top: tableY, left: 50, right: 0, bottom: 0 },
-        1: { cellWidth: 50, textColor: [255, 255, 255] }, // Setting text color to white for the second column
-        columnStyles: {
-          0: { cellWidth: 60 },
-          1: { cellWidth: 50 },
-        },
-      });
-    }
-
-    // Add QR code
-    const qrText = `https://block-grade.vercel.app/ediploma?code=${id}`;
-    const qrImageBuffer = qrImage.imageSync(qrText, { type: 'png' });
-    const qrBase64 = Buffer.from(qrImageBuffer).toString('base64');
-    doc.addImage(`data:image/png;base64,${qrBase64}`, 'PNG', margin + 10, 240, 50, 50);
-    doc.text(`ID:${id}`, margin + 15, 244);
-    // Add logos
-    const logoImg = new Image();
-    const hackathonLogoImg = new Image();
-
-    logoImg.src = logo;
-    hackathonLogoImg.src = hackathonLogo;
-
-    doc.addImage(logoImg, 'PNG', margin + 10, 10, 30, 30);
-    doc.addImage(hackathonLogoImg, 'PNG', margin + 140, 10, 55.14, 30);
-    doc.text(`Skenirajte QR code da biste provjerili E-diplomu!`, margin + 15, 290);
-    doc.text(`Generirano od strane BlockGrade-a`, margin + 120, 290);
-
-    doc.autoPrint(); // Automatically prints the PDF
-    window.open(doc.output('bloburl'), '_blank'); // Opens the PDF in a new tab for printing
-  };
 
   return (
 
@@ -217,7 +134,7 @@ const EDiploma = () => {
         </Card>
       </div>
       <footer className='flex justify-center items-center gap-3'>
-        <Button size="lg" className="" onClick={handlePrintDiploma}>Printaj</Button>
+        <Button size="lg" className="" onClick={state && id ? () => handlePrintDiploma(state, id) : undefined}>Printaj</Button>
         <Button
           onClick={() => window.location.assign(`/`)}>
           Nazad
