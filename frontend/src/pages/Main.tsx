@@ -62,9 +62,9 @@ const Main = () => {
       </SimpleHeader>
 
 
-      <div className='grid md:grid-flow-col justify-center items-center gap-20 h-2/3 my-20'>
+      <div className='flex flex-wrap justify-center gap-20 h-2/3 my-20'>
 
-        <Card className="w-64 h-full">
+        <Card className="w-64 ">
           <CardHeader>
             <img src={obiteljSVG} alt="Obitelj"/>
             <CardTitle className='text-center'>Zelim vidjeti <br></br>E-Diplomu</CardTitle>
@@ -102,7 +102,7 @@ const Main = () => {
 
 
 
-        <Card className="w-64 h-full">
+        <Card className="w-64">
           <CardHeader>
             <CardTitle>Kako radi?</CardTitle>
           </CardHeader>

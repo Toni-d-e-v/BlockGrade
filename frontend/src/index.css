@@ -51,23 +51,3 @@
 }
 
 
-/* override browser default */
-html,
-body {
-  margin: 0;
-  padding: 0;
-
-}
-
-html{
-}
-
-/* use viewport-relative units to cover page fully */
-body {
-  background-color: red;
-
-  padding: 0;
-  margin: 0;
-  
-
-}
