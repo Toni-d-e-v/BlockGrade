@@ -1,8 +1,7 @@
 # BlockGrade - Revolucionarni sustav e-diploma na tehnologiji blockchaina
 
 BlockGrade predstavlja revolucionaran i inovativan pristup sustavu e-diploma, postavljajući nove standarde u izdavanju, pohrani i potvrđivanju obrazovnih uvjerenja. Temelji se na tehnologiji blockchaina, s fokusom na Ethereum platformi, kako bi pružio niz ključnih prednosti u usporedbi s tradicionalnim sustavima izdavanja diploma.
-https://crypto.ba/t/blockgrade-code-challenge-hackathona-2024-by-sumit/7640/3
-
+[PHOTOS AND VIDEO](https://crypto.ba/t/blockgrade-code-challenge-hackathona-2024-by-sumit/7640/3)
 ## Ključne značajke BlockGrade sustava:
 
 ### Transparentnost blockchaina:
