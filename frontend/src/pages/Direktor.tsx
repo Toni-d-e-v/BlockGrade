@@ -282,7 +282,7 @@ const Direktor = () => {
               <Button onClick={issueCertificate} disabled={loading}>
                 {loading ? 'Loading...' : 'Izdaj uvjerenje'}
               </Button>
-              <Button className="bg-lime-500 hover:bg-lime-400" onClick={handleAddRow} size="icon">
+              <Button variant="destructive" className="bg-lime-500 hover:bg-lime-400" onClick={handleAddRow} size="icon">
                 <Plus />
               </Button>
             </CardFooter>

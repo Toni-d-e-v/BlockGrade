@@ -38,27 +38,27 @@ import BlockGradeABI from '../../BlockGrade.json';
 const Main = () => {
   const [code, setCode] = useState('');
   const [latestEvents, setLatestEvents] = useState([]);
-  
+
   const { setTheme } = useTheme()
   const { toast } = useToast()
 
 
-      const provider = new JsonRpcProvider('https://rpc.tornadoeth.cash/goerli');
+  const provider = new JsonRpcProvider('https://rpc.tornadoeth.cash/goerli');
 
   return (
-    <div className='flex flex-col justify-between'>
+    <div className='min-h-screen flex-col '>
 
 
 
       <SimpleHeader>
-      <div className = "flex justify-center">
+        <div className="flex justify-center">
 
-      <Button size="lg"
-        onClick={
-          () => window.location.assign("/direktor")
-        }
-      >Direktor Panel</Button>
-      </div>
+          <Button size="lg"
+            onClick={
+              () => window.location.assign("/direktor")
+            }
+          >Direktor Panel</Button>
+        </div>
       </SimpleHeader>
 
 
@@ -66,7 +66,7 @@ const Main = () => {
 
         <Card className="w-64 ">
           <CardHeader>
-            <img src={obiteljSVG} alt="Obitelj"/>
+            <img src={obiteljSVG} alt="Obitelj" />
             <CardTitle className='text-center'>Zelim vidjeti <br></br>E-Diplomu</CardTitle>
           </CardHeader>
           <CardContent>
@@ -76,25 +76,25 @@ const Main = () => {
               onChange={(e) => setCode(e.target.value)} // Update the state or variable on input change
               placeholder='ID diplome'
             />
-            
+
           </CardContent>
           <CardFooter className='justify-center'>
-          <Button
-    onClick={async () => {
-        try {
-            await getCertificates(provider, code);
-            window.location.assign(`/ediploma?code=${code}`);
-        } catch (error) {
-            toast({
-                variant: "destructive",
-                title: "Pogrešan ID",
-                description: "Molimo unesite ispravan ID Diplome",
-            })
-        }
-    }}
->
-    Nastavi
-</Button>
+            <Button
+              onClick={async () => {
+                try {
+                  await getCertificates(provider, code);
+                  window.location.assign(`/ediploma?code=${code}`);
+                } catch (error) {
+                  toast({
+                    variant: "destructive",
+                    title: "Pogrešan ID",
+                    description: "Molimo unesite ispravan ID Diplome",
+                  })
+                }
+              }}
+            >
+              Nastavi
+            </Button>
 
 
           </CardFooter>
@@ -110,10 +110,10 @@ const Main = () => {
             <p>Sustav koristi prednosti blockchain tehnologije kako bi osigurao  neizmjenjivost izdanih diploma.</p>
             <br></br>
             <p>BlockGrade koristi Ethereum blockchain kako bi omogućio visoku razinu transparentnosti. </p>
-            
+
           </CardContent>
           <CardFooter className='flex-col'>
-          <Button className='m-5' variant="secondary" onClick={() => {
+            <Button className='m-5' variant="secondary" onClick={() => {
               window.location.assign("/info")
             }}>
               Dodatne informacije
@@ -127,9 +127,9 @@ const Main = () => {
 
       </div>
       <Toaster />
-<SimpleFooter></SimpleFooter>
+      <SimpleFooter></SimpleFooter>
 
-</div>
+    </div>
   );
 };
 
